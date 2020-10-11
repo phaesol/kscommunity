@@ -1,0 +1,56 @@
+body{
+    margin:0px;
+    padding:0px;
+}
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.post_wrapper{
+    
+    display: flex;      /* 밑의 자식 요소들 관리하기 위해! 여기서는 p 태그에 적용 ! 이 옵션을 주게 되면 제목 내용 이미지가 하나하나 간격 이쁘게 가짐. */
+    margin:  10px auto;    /* 게시물 위아래 간격과 좌우는 auto를 주게 되면 알아서 가운데 정렬 잘 됨.  */
+    padding:0px 40px;      /* 마찬가지로 상자 안의 간격 조절  */
+    justify-content: center;      /* 글자 수평 정렬 ( 여기서는 패딩에 미리 줘버려서 별 효과 없긴하지만.. )  */
+    align-items: center;         /* 글자 수직 정렬  */
+    width: 1000px;
+    height: 100px;               /* 네모 길이 직사각형으로 만들어 주었음. 가로 세로  */
+    border: 1px solid black;   /* 윤곽선 굵기, 스타일, 색깔  */
+
+}
+
+.post_wrapper p{  /*상속 post_wrapper 안에 있는 p 태그 또는 클래스*/
+    flex:1;
+    font-family: 'IBMPlexSansKR-Regular';
+    
+}
+img{
+    width: 80px;
+    height: 90px;
+    float: right;
+
+}
+
+h1{
+   
+    font-family: 'IBMPlexSansKR-Regular';
+    margin-top: 100px;
+    margin-bottom: 50px ;
+    text-align: center;
+    
+}
+
+
+a{
+    text-decoration: none;
+}
+.p{
+    margin-left: 1100px;
+    margin-bottom: 30px;
+    color:rgb(0, 0, 0);
+    
+}

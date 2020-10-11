@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} <title>커뮤니티 이름 뭐하딩</title> {% endblock title %}
+
+{% block content %}
+
+
+<div class="content-wrapper">
+
+    <div class="content">
+
+        <a href="{% url 'free' %}">자유 게시판</a>
+
+        {% for post in free_post %}
+        <div class="free-wrapper">
+            {{post.title}}
+            {{post.content}}
+
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+{% endblock content %}

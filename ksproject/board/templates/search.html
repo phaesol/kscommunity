@@ -1,0 +1,32 @@
+{% extends 'free.html' %}
+{% load static %}
+
+
+{% block content %}
+<h1><a href="{% url 'free' %}">자유 게시판</a></h1>
+<p class="p"><a href="{% url 'free_create' %}">글 작성하기 </a></p>
+<form method="POST">
+    {%csrf_token%}
+    <!--post값을 가진 오브젝트 모음인 free_post 가 없으면 해당 텍스트 띄우기-->
+    {% if not free_post %}
+    <h1> 검색 결과가 없습니다. </h1>
+    {% else %}
+
+    <!--free_post 가 있으면, for문으로 하나하나 보여줌.-->
+    {% for post in free_post.all %}
+    <div class="post">
+        <a href="{% url 'free_detail' post.id %}">
+            <div class="post_wrapper">
+                <p>{{post.title}}</p>
+                <p>{{post.content|safe}}</p>
+                <!--filter safe -->
+                <p>{% if post.myimage %}
+                    <img src="{{post.myimage.url}}"></p>
+                {% endif %}
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+</form>
+{% endblock content %}

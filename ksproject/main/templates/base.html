@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block head%}
+
+{% block title %}
+
+{% endblock title %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+
+
+{% endblock head%}
+
+<body>
+    {% block sidebar %}
+
+    <nav>
+        <ul class="nav_container">
+            <li class="nav_bar">
+                <a href="{% url 'index' %}">홈</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'free' %}">자유 게시판</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'private' %}">익명 게시판</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'index' %}">장터 게시판</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'index' %}">홍보 게시판</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'index' %}">신입생 게시판</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'index' %}">졸업생 게시판</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'index' %}">공모전 게시판</a>
+            </li>
+            <li class="nav_bar">
+                <a href="{% url 'index' %}">스터디 게시판</a>
+            </li>
+        </ul>
+    </nav>
+    {% endblock sidebar %}
+    {% block content %}
+
+    {% endblock content %}
+
+</body>
+
+</html>

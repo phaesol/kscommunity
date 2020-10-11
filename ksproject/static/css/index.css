@@ -1,0 +1,76 @@
+body {
+    padding: 0px;
+    margin: 0px;
+
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* .content{
+
+    width: 200px; 
+    height: 200px; 
+    border: 1px solid black; 
+    border-radius: 2px;
+    display: inline-flex;
+    
+    text-align: center;
+    justify-content: center;
+    margin : 100px 10px 10px 0px;       위오른쪽아래왼쪽
+    
+
+
+} */
+/* a{
+    padding: 10px;
+    text-decoration : none;
+}
+p{
+    font-family: 'IBMPlexSansKR-Regular';
+    
+} */
+
+
+
+
+.nav_container {
+    position: fixed;
+    /* 네비바 상단 고정 */
+    top: 0;
+    right: 0;
+    left: 0;
+    /* 고정 시킬 때 공간이 위 좌우로 없게 하기 위해서 적어준 태그 */
+    display: flex;
+    /* 저번 포스팅에 설명이 되어있지만, 간단히 여기서는 수평정렬로 쓰임. */
+    flex-direction: row;
+    /* 가로로 정렬해주기 */
+    margin: 0px;
+    padding: 0px;
+    /* 이렇게 해야 위에 딱 붙게 됩니당 */
+    background-color: #A2C0A4;
+    /* 배경 색상 */
+    list-style-type: none;
+    /*리스트 동그라미 없애기*/
+
+}
+
+.nav_bar {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.nav_bar a {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-family: 'IBMPlexSansKR-Regular';
+}
+
+.nav_bar:hover {
+    background-color: #4e5c4f;
+}

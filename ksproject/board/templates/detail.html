@@ -1,0 +1,23 @@
+<a href="{% url 'free' %}"><button>뒤로가기</button></a>
+<br><br>제목: {{my_post.title}}
+<br><br>내용 : {{my_post.content|safe}}
+<br><br><a href="{% url 'free_update' my_post.id %}"><button>수정</button></a>
+<a href="{% url 'free_delete' my_post.id %}"><button>삭제</button></a>
+<form method="POST" action="{% url 'create_comment' my_post.id %}">
+    {%csrf_token%}
+    {{comment_form}}
+    <!--댓글폼 띄워주기-->
+    <input type="submit" value="댓글 작성 완료">
+    {% for i in my_post.comment_set.all %}
+    <!--특정아이디값(my_post)을 가진 게시물의 댓글 모음 (comment_set)을 전부 가져옴. -->
+    <p>댓글: {{i}}</p>
+    <!--for문으로 댓글모음을 하나하나 가져와줌. -->
+    <p>시간:{{i.created_at}}</p>
+    <!--시간도 템플릿상에서 띄워주기 위해 가져옴. -->
+    <hr>
+    <!--일단은 선으로 하나하나 구분지어줌. -->
+    {%endfor%}
+    <!--for문종료 -->
+
+
+</form>

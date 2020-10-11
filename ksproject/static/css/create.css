@@ -1,0 +1,123 @@
+/* 초기화 코드 */
+html {
+    font-family: 'IBMPlexSansKR-Regular';
+    padding: 0;
+    margin: 0 auto;
+    font-size: 10px;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/* 마진 코드 나중에 html에서 상쇽*/
+.margin {
+    margin-top: 3em;
+}
+
+
+
+/* font-weight bold 로 조정 그러면 그 안에 들어 있는 제목, 내용 폰트에 bold 적용됨 */
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+    height: 25%;
+}
+
+
+/* 텍스트와 입력 필드가 딱붙어 있는거 조금 띄워줌 . */
+.input-box {
+    margin-top: 2rem;
+}
+
+
+
+/* border, border radius를 조정 */
+
+.submit_btn {
+    display: block;
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    margin: 4rem auto;
+    border: 2px solid rgb(141, 141, 141);
+    background-color: white;
+    border-radius: 2rem;
+}
+
+
+/* 마우스를 가져다 댔을 때  나오는 효과*/
+
+.submit_btn:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgb(141, 141, 141);
+}
+
+.submit_btn:focus {
+    outline: none;
+}
+
+/*flex 요소들을 이용해서 가운데 정렬해주기, 위에서 띄워주기*/
+
+.myimage-wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 8rem;
+}
+
+
+/* 추가 정렬, 글자 사이즈 조정
+  */
+.myimage-text {
+    margin-left: 8rem;
+
+    font-size: 1.5rem;
+}
+
+.input-image {
+    margin-left: 2rem;
+}
+
+
+
+#id_title {
+    border: 2px solid rgb(141, 141, 141);
+    border-radius: 2rem;
+    height: 25px;
+    padding: 12 10;
+
+}
+
+
+#id_content {
+    border: 2px solid rgb(141, 141, 141);
+    border-radius: 1rem;
+    width: 300px;
+    height: 200px;
+    padding: 12 10;
+}
+
+
+/*.form-wrapper 안에 있는 input요소인 input-box 상속*/
+.form-wrapper .input-box input:focus {
+    outline: none;
+    background-color: rgb(255, 250, 245);
+}
+
+/* input 요소가 아닌 textarea는 아이디값으로 적용*/
+#id_content:focus {
+    outline: none;
+    background-color: rgb(255, 250, 245);
+}
