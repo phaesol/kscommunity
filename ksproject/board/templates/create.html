@@ -1,14 +1,17 @@
+{% extends 'base.html' %}
 {% load static %}
-{% block title %}<title>글 작성</title>{% endblock title %}
 
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="{% static 'css/create.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'ksproject/index.css' %}">
+{% endblock head %}
 
+{% block title %}<title>글 작성</title>{% endblock title %}
 
 {% block content %}
 <form method="POST" , enctype="multipart/form-data" autocomplete="off">
     {% csrf_token %}
-
-
 
     <!-- 
     {% for i in post_form %}
@@ -37,38 +40,44 @@
 
 
 
+   
 
-
-    {% for i in post_form%}
+    {% for i in post_form %}
+   
     {% if i.label != "Myimage" %}
 
+
+
+    {% if i.label == "Title" %}
     <div class="form-wrapper">
-
-
-        {% if i.label == "Title" %}
-
-        <div class="title margin">제목</div>
-        {% elif i.label == "Content" %}
-        <div class="content margin">내용</div>
-
-        {% endif %}
-
-        <div class="input-box margin">{{i}}</div>
-
+        <div class="title">제목</div>
+        <div class="input-box">{{i}}</div>
     </div>
+    {% elif i.label == "Content" %}
+    <div class="form-wrapper2">
+        <div class="content">내용</div>
+        <div class="input-box">{{i}}</div>
+    </div>
+    {% endif %}
+
+
+
+
     {%else%}
 
     <div class="myimage-wrapper">
         <div class="myimage-text">그림 첨부</div>
         <div class="input-image">{{i}}</div>
 
+
     </div>
+
 
     {%endif%}
 
     {%endfor%}
-
     <input type="submit" value="작성 완료" class="submit_btn">
+
 
 
 </form>

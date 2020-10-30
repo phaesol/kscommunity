@@ -143,6 +143,10 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'board/static/'),
+    os.path.join(BASE_DIR, 'ksproject/static/'),
+]
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

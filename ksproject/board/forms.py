@@ -12,7 +12,7 @@ class PostForm(forms.ModelForm):
         fields = ('title','content','myimage',)
 
         widgets = {                                    
-            'content' : SummernoteWidget(attrs={'summernote': {'width': '60%', 'height': '300px'}}), # 넓이 높이 정해주기
+            'content' : SummernoteWidget(), 
         }
 
 

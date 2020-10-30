@@ -66,6 +66,7 @@ def free_create(request):
             temp_form.save()
         return redirect('free')          
     context['post_form'] = PostForm()
+  
     return render(request,'create.html',context)
 
 

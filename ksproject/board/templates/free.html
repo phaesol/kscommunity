@@ -10,7 +10,7 @@
 
 {% block content %}
 <h1>자유 게시판 </h1>
-<p class="p"><a href="{% url 'free_create' %}">글 작성하기 </a></p>
+<div class="p"><a href="{% url 'free_create' %}">글 작성하기 </a></div>
 <form method="POST" action="{% url 'search' %}">
     {%csrf_token%}
     <input type="search" placeholder="검색어를 입력하세요." aria-label="Search" name="post" value="{{post}}">

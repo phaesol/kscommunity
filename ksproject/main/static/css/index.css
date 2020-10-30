@@ -1,7 +1,11 @@
-body{
-    padding :0px;
-    margin : 0px;
-   
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+    min-width: 320px;
+    min-height: 571px;
+
 }
 
 @font-face {
@@ -9,6 +13,11 @@ body{
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+
+* {
+    list-style: none;
+    text-decoration: none;
 }
 
 /* .content{
@@ -35,36 +44,101 @@ p{
     
 } */
 
+nav {
+    width: 100%;
+    height: 200px;
+}
+
+/*카테고리 네브바*/
+.category-container {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    background-color: #A2C0A4;
+    color: white;
 
 
-
-.nav_container{
-    position: fixed;  /* 네비바 상단 고정 */
-    top:0;
-    right:0;
-    left:0;           /* 고정 시킬 때 공간이 위 좌우로 없게 하기 위해서 적어준 태그 */
-    display: flex;     /* 저번 포스팅에 설명이 되어있지만, 간단히 여기서는 수평정렬로 쓰임. */
-    flex-direction: row;  /* 가로로 정렬해주기 */
-    margin: 0px;         
-    padding: 0px;           /* 이렇게 해야 위에 딱 붙게 됩니당 */
-    background-color:#A2C0A4;     /* 배경 색상 */
-    list-style-type: none;       /*리스트 동그라미 없애기*/
 
 }
 
-.nav_bar{
-    padding:15px;
-    cursor: pointer;
+.category-bar-logo {
+    font-size: 1.6rem;
+    display: flex;
+    font-size: 1.6rem;
+    align-items: center;
+    justify-content: center;
+
+    width: 10%;
+
+
 }
 
-.nav_bar a{
+.category-bar {
+    display: flex;
+    font-size: 1.6rem;
+    align-items: center;
+    justify-content: center;
+
+    width: 17%;
+
+
+}
+
+/*바텀 네브바*/
+
+.nav-container {
+    width: 100%;
+    height: 65%;
+    border-bottom: 2px solid #A2C0A4;
+    display: flex;
+    font-size: 1.4rem;
+    margin: 0;
+    padding: 0;
+
+}
+
+
+
+.community,
+.promotion,
+.impormation,
+.life {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 100%;
+    align-items: center;
+
+    margin-left: 3%;
+    padding-top: 10px;
+}
+
+.community {
+    padding-left: 8%;
+
+}
+
+.promotion,
+.impormation,
+.life {
+    margin-left: 2%;
+}
+
+.nav-item {
+    width: 100%;
+    height: 20%;
     text-align: center;
-    text-decoration: none;
-    color:white;
-    font-family: 'IBMPlexSansKR-Regular';
 }
 
-.nav_bar:hover{
-    background-color: #4e5c4f;
+
+.nav-item a {
+    color: black;
 }
 
+
+.nav-item a:hover {
+    color: #A2C0A4;
+}

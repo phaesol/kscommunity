@@ -14,14 +14,6 @@ html {
 }
 
 
-
-/* 마진 코드 나중에 html에서 상쇽*/
-.margin {
-    margin-top: 3em;
-}
-
-
-
 /* font-weight bold 로 조정 그러면 그 안에 들어 있는 제목, 내용 폰트에 bold 적용됨 */
 .form-wrapper {
     display: flex;
@@ -30,16 +22,37 @@ html {
     font-weight: bold;
     justify-content: center;
     text-align: center;
-    height: 25%;
+    height: 20%;
+
 }
 
+.form-wrapper2 {
+    display: flex;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+    flex-direction: column;
+    text-align: center;
+    height: 25%;
+
+}
+
+
+
+.content-box {
+    margin: 1rem;
+}
 
 /* 텍스트와 입력 필드가 딱붙어 있는거 조금 띄워줌 . */
 .input-box {
-    margin-top: 2rem;
+
+    margin: 1rem auto;
+
 }
 
-
+.input-box .summernote-div #id_content_iframe {
+    margin: 1rem auto;
+}
 
 /* border, border radius를 조정 */
 
@@ -48,10 +61,11 @@ html {
     text-align: center;
     width: 100px;
     height: 30px;
-    margin: 4rem auto;
+    margin: 3rem auto;
     border: 2px solid rgb(141, 141, 141);
     background-color: white;
     border-radius: 2rem;
+
 }
 
 
@@ -74,7 +88,7 @@ html {
     justify-content: center;
     display: flex;
     flex-direction: row;
-    margin-top: 8rem;
+    margin-top: 35rem;
 }
 
 
@@ -120,4 +134,18 @@ html {
 #id_content:focus {
     outline: none;
     background-color: rgb(255, 250, 245);
+}
+
+@media(max-width:400px) {
+    .form-wrapper {
+        height: 15%;
+
+    }
+
+    .form-wrapper2 {
+        height: 20%;
+
+    }
+
+
 }
