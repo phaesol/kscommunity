@@ -15,35 +15,55 @@
 <body>
 
 
-
     {% block sidebar %}
 
     <nav>
+      
         <ul class="category-container">
             <li class="category-bar-logo">
                <a href="{% url 'index' %}">홈/로고</a>
             </li>
-            <li class="category-bar">
-              {% for category in categories %}
-              {{category}}
-              {% endfor %}
-            </li>
-          
-        </ul>
-
-        <ul class="nav-container">
-            {% for mini_category in mini_categories %}   
-            <div class="nav-item">
-             
-                <a href="{% url 'post_list' mini_category.id %}">{{mini_category}}</a> 
-            
-            </div>
-            {% endfor %}
-
+       {% comment %} 
       
 
-           
+       {% endcomment %}
+
+       {% for category in categories %}  
+                <li class="category-bar">
+                {{ category }}
+                </li>
+                {% endfor %}
+                   
         </ul>
+               
+                   
+              
+        
+                
+        <ul class="nav-container">
+                   
+            {% for category in categories %} 
+            <div class="nav-item">
+                {% for mini_category in category.mini_category.all %}  
+            
+                    <a href="{% url 'post_list' mini_category.id %}">{{mini_category.title}}</a>
+                {% endfor %}
+                  </div> 
+            {% endfor %}
+                     
+                    
+            
+            
+            </ul>
+           
+            
+
+    
+  
+  
+         
+    
+
     </nav>
     {% endblock sidebar %}
     {% block content %}

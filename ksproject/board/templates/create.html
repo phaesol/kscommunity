@@ -13,7 +13,7 @@
 {% block content %}
 <form method="POST" , enctype="multipart/form-data" autocomplete="off">
     {% csrf_token %}
-
+    <h1>{{mini_category}}</h1>
     {% for i in post_form %}
    
     {% if i.label != "Myimage" %}

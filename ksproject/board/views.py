@@ -16,6 +16,9 @@ def create(request,mini_category_id): #우리가 가져올 mini_category 값 가
     mini_categories = Mini_Category.objects.all() # 마찬가지로 미니카테고리도 들고 와줌. 마찬가지로 얘도 base.html에서 씀.
     context['mini_categories'] = mini_categories
 
+    mini_category = Mini_Category.objects.get(id=mini_category_id)     #작성 게시판 이름으로 써줄 거임.
+    context['mini_category'] = mini_category
+
     if request.method=="POST":
         post_form = PostForm(request.POST, request.FILES) # POST 요청으로 들어오면 미디어파일도 있기 때문에, request.FILES 도 같이 추가
         

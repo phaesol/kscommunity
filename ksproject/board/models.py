@@ -8,7 +8,7 @@ class Category(models.Model):
 
 class Mini_Category(models.Model):
     title = models.CharField(max_length=50)
-    category = models.ForeignKey(Category,on_delete=models.CASCADE) 
+    category = models.ForeignKey(Category,on_delete=models.CASCADE , related_name="mini_category") 
     
     def __str__(self):
         return self.title
