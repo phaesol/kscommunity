@@ -1,133 +1,59 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import PostForm,CommentForm
-from .models import Post,Comment
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView,DeleteView,UpdateView
-from django.urls import reverse_lazy
+from .forms import PostForm
+from .models import Post,Category,Mini_Category
 from django.core.paginator import Paginator
+# from django.urls import reverse_lazy
 
 
-def free(request):
-    context=dict()
-    free_post_list = Post.objects.filter(category__icontains="자유 게시판").order_by('-id') #id 값순대로 내림차순
-    paginator = Paginator(free_post_list, 10) # 하나의 페이지당 10개의 오브젝트들을 보여줌.
-    page_number = request.GET.get('page') #GET 방식으로 요청한 url의 page 값을 가져와줌.
-    page_obj = paginator.get_page(page_number) # 한 페이지당 요청된 갯수만큼의 오브젝트들
-    context['page_obj'] = page_obj
-    return render(request,'free.html',context)
 
 
-def free_detail(request,post_id):
-    context = dict()
-    
-    my_post = get_object_or_404(Post,pk=post_id) #해당 id 값의 게시물 띄워주기
-    comment_form = CommentForm()                 #모델폼 변수에 담아주기
-    context['my_post'] = my_post                 
-    context['comment_form'] = comment_form       #가져올 값들 context에 딕셔너리 형태로 담아주기
-    return render(request,'detail.html',context)
+def create(request,mini_category_id): #우리가 가져올 mini_category 값 가져와 주기
+    context = dict() 
 
-def free_update(request,post_id):
-    my_post = get_object_or_404(Post,pk=post_id)
-    post_form = PostForm(instance = my_post)
-    if request.method == "POST":
-        update_form =  PostForm(request.POST, instance = my_post)
-        if update_form.is_valid():
-            update_form.save()
-            return redirect('free_detail',post_id)
-    return render(request, 'create.html',{'post_form':post_form})
+    categories = Category.objects.all()   # 전체 카테고리를 오브젝트로 들고와서 템플릿에 네브바로 띄워주기 위해
+    context['categories'] = categories    #이것은 템플릿 상속을 받아온 base.html 에 쓸 거임.
 
+    mini_categories = Mini_Category.objects.all() # 마찬가지로 미니카테고리도 들고 와줌. 마찬가지로 얘도 base.html에서 씀.
+    context['mini_categories'] = mini_categories
 
-def free_delete(request,post_id):
-    my_post = get_object_or_404(Post,pk=post_id)
-    my_post.delete()
-    return redirect('free')
-    
-def create_comment(request,post_id):
-    filled_form = CommentForm(request.POST) #POST 요청이 들어오면, 
-    if filled_form.is_valid(): #유효성 검사에 성공하면, if문 실행. 실패하면 다시 detail로 redirect해서 입력받게 함.
-        temp_form = filled_form.save(commit=False)  #category처럼 어떤 id의 글에 저장하는지 명시해주기 위해 잠시 저장 미룸. 
-        temp_form.post = Post.objects.get(id = post_id) #참조하는 FK의 값이 어떤 id 값을 받는지 명시
-        temp_form.save()                                #저장!
-
-    return redirect('free_detail',post_id)  #실패시 다시 redirect!
-
-def free_create(request):
-
-
-    context = dict()
-
-    
-
-    if request.method == "POST"  :
-        field_form = PostForm(request.POST, request.FILES)
-        if field_form.is_valid():
-            temp_form = field_form.save(commit = False)  
-            temp_form.category ="자유 게시판"  
-            temp_form.save()
-        return redirect('free')          
-    context['post_form'] = PostForm()
-  
-    return render(request,'create.html',context)
-
-
-def private(request):
-    context=dict()
-    private_post = Post.objects.filter(category__icontains="익명 게시판")
-    context['private_post'] = private_post
-    return render(request,'private.html',context)
-
-
-def private_create(request):
-    context = dict()
-    field_form = PostForm(request.POST, request.FILES)
-    if request.method == "POST":
-        if field_form.is_valid():
-            temp_form = field_form.save(commit=False)
-            temp_form.category = "익명 게시판"
-            temp_form.save()
-        return redirect('private')
-    
-    
-    context['post_form'] = PostForm
-    return render(request,'create.html',context)
-
-def search(request):
-    context = dict()
-    free_post = Post.objects.filter(category__icontains="자유 게시판").order_by('-id') #id 값대로 내림차순한 값과, 자유 게시판에 적힌 글들만 불러와줌.
-    post = request.POST.get('post',"") # POST 요청에 따라 인자중에, post 값이 있으면 가져오고, 아니면 빈 문자열 리턴 
-    if post:
-        free_post = free_post.filter(title__icontains=post) #post가 있으면, title에서 post 내용이 있는 것만 띄워줌.
-        context['free_post'] = free_post
-        context['post'] = post
-        return render(request,'search.html',context)        # post와 post가 포함된 오브젝트들을 딕셔너리형태로 불러와줌.
-    else:
-        return render(request,'search.html')               # 해당 post 내용이 없으면, search.html 렌더
+    if request.method=="POST":
+        post_form = PostForm(request.POST, request.FILES) # POST 요청으로 들어오면 미디어파일도 있기 때문에, request.FILES 도 같이 추가
         
+        if post_form.is_valid(): #폼 유효성 검사
+            category_form = post_form.save(commit=False)  #저장 지연
+            category_form.category = Mini_Category.objects.get(id=mini_category_id) #저장하기전에 아이디 값 category 필드에 같이 넘겨서 
+            category_form.save() #아이디값 가진 채 저장
+            return redirect('post_list',mini_category_id) # redirect로 post_list/mini_category_id 이렇게 url 뒤에 id 지정해서 붙여줌.
 
-# class PrivateUpdate(UpdateView):
-#     model = Post
-#     fields = ['title','content','myimage',]
-#     template_name = 'update.html'
-#     context_object_name = 'update_object'
+        else:
+            context['post_form'] = PostForm()
+            return render(request,'create.html',context) # 폼 유효성 검사 실패시 
+    else:
+        context['post_form'] = PostForm()
+        return render(request,'create.html',context)     # GET 방식으로 요청 들어올시
+
+
+def post_list(request,mini_category_id): #여기서도 각각의 미니카테고리 아이디 가져올거임.
+    context=dict()
     
+    categories = Category.objects.all()
+    context['categories'] = categories   #위에처럼 카테고리,미니 카테고리 네브바에 띄워줄 객체들 여기서도 들고와야함.
+
+    mini_categories = Mini_Category.objects.all()
+    context['mini_categories'] = mini_categories  
+    
+    mini_category = Mini_Category.objects.get(id=mini_category_id)     #마찬가지로 여기서도 미니카테고리의 id 를 들고와줌.
+    context['mini_category'] = mini_category
 
 
+    category_post_list = Post.objects.filter(category=mini_category)   # Post 모델의 카테고리 필드에서 위의 mini_category 
+    context['category_post_list'] =category_post_list                  # 즉 , 해당 미니카테고리의 아이디인 것만 필터링
+ 
+    # paginator = Paginator(free_post_list, 10) # 하나의 페이지당 10개의 오브젝트들을 보여줌.
+    # page_number = request.GET.get('page') #GET 방식으로 요청한 url의 page 값을 가져와줌.
+    # page_obj = paginator.get_page(page_number) # 한 페이지당 요청된 갯수만큼의 오브젝트들
+    # context['page_obj'] = page_obj
+    return render(request,'post_list.html',context)
 
-# # def sell(request):
-#     context=dict()
-#     private_post =Post.objects.filter(category__contains="장터 게시판")
-#     context['private_post'] = private_post
-#     return render(request,'private.html',context)
 
-
-# def sell_create(request):
-#     context = dict()
-#     if request.method == "POST"  :
-#         field_form =PostForm(request.POST, request.FILES)
-#         if field_form.is_valid():
-#             field_form.save()
-#         return redirect('free')
-#     post_form = PostForm
-#     context['post_form'] = post_form
-#     return render(request,'create.html',context)
 

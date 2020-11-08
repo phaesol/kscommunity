@@ -3,24 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% block head %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
-
-
-    {% block head %}
-    {% endblock head %}
-   
-        {% block title %}
-
-        {% endblock title %}
- 
-
-
-
-
+    {% block title %}{% endblock title %}
 </head>
+{% endblock head %}
 
 <body>
 
@@ -34,77 +24,24 @@
                <a href="{% url 'index' %}">홈/로고</a>
             </li>
             <li class="category-bar">
-               커뮤니티
+              {% for category in categories %}
+              {{category}}
+              {% endfor %}
             </li>
-            <li class="category-bar">
-               홍보/모집
-            </li>
-            <li class="category-bar">
-                정보
-            </li>
-            <li class="category-bar">
-               생활
-            </li>
-           
+          
         </ul>
 
         <ul class="nav-container">
+            {% for mini_category in mini_categories %}   
+            <div class="nav-item">
+             
+                <a href="{% url 'post_list' mini_category.id %}">{{mini_category}}</a> 
             
-                <div class="community">
-                <li class="nav-item">
-                    <a href="{% url 'free' %}">자유 게시판</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'free' %}">익명 게시판</a>
-                </li>
-                <li class="nav-item">
-                <a href="{% url 'free' %}">신입생 게시판</a>
-                </li>
-                <li class="nav-item">
-                <a href="{% url 'free' %}">졸업생 게시판</a>
-                </li>
-                </div>
+            </div>
+            {% endfor %}
+
       
 
-                <div class="promotion">
-                <li class="nav-item">
-                    <a href="{% url 'private' %}">동아리</a>
-                </li>
-                <li class="nav-item">
-                <a href="{% url 'private' %}">공모전</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'private' %}">스터디</a>
-                </li>
-           
-                </div>
-
-                <div class="impormation">
-                <li class="nav-item">
-                    <a href="{% url 'index' %}">강의 정보 </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'index' %}">취업ㆍ진로</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'index' %}">유학ㆍ교환 학생</a>
-                </li>
-           
-                </div>
-
-                <div class="life">
-                <li class="nav-item">
-                    <a href="{% url 'index' %}">자취ㆍ기숙사 </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'index' %}">플리마켓</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{% url 'index' %}">책방</a>
-                </li>
-               
-                </div>
-           
            
         </ul>
     </nav>

@@ -1,46 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block head %}
+{% block title %}<title>글작성</title>{% endblock title %}
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/create.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'ksproject/index.css' %}">
 {% endblock head %}
 
-{% block title %}<title>글 작성</title>{% endblock title %}
+
 
 {% block content %}
 <form method="POST" , enctype="multipart/form-data" autocomplete="off">
     {% csrf_token %}
-
-    <!-- 
-    {% for i in post_form %}
-
-
-    <div class="form-wrapper">
-
-        {% if i.label == "Title" %}
-
-        <div class="title margin">제목</div>
-        {% elif i.label == "Content" %}
-
-        <div class="content margin">내용</div>
-        {% elif i.label == "Myimage" %}
-
-        <div class="myimage margin">그림 첨부</div>
-
-        {% endif %}
-
-        <div class="input-box">{{i}}</div>
-
-    </div>
-    {%endfor%}
-
-    <input type="submit" value="작성 완료" class="submit_btn"> -->
-
-
-
-   
 
     {% for i in post_form %}
    
@@ -76,10 +48,19 @@
     {%endif%}
 
     {%endfor%}
+   
     <input type="submit" value="작성 완료" class="submit_btn">
 
 
 
 </form>
 
-{% endblock content %}
+
+
+
+
+
+    {% endblock content %}
+
+
+

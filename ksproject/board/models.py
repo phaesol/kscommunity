@@ -1,20 +1,33 @@
 from django.db import models
 
+class Category(models.Model):
+    title = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.title
+
+class Mini_Category(models.Model):
+    title = models.CharField(max_length=50)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE) 
+    
+    def __str__(self):
+        return self.title
+        
 class Post(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
-    updated_at = models.DateTimeField(auto_now = True)
+    updated_at = models.DateTimeField(auto_now_add= True) # 최초 생성 날짜만 갱신
     myimage = models.ImageField(null = True, blank = True)
-    category = models.CharField(max_length=50,default="") 
+    category = models.ForeignKey(Mini_Category,on_delete=models.CASCADE) 
 
-
+    def __str__(self):
+        return self.title
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post,on_delete=models.CASCADE) #Post의 게시물이 삭제되면, 그 게시물에 있던 댓글도 삭제되는 on_delete 옵션
-    body = models.CharField('댓글 작성하기',max_length=150)          #'댓글 작성하기'을 준 이유는 나중에 label이름을 body가 아닌 댓글 작성하기로 바꾸기 위해서.
-    created_at = models.DateTimeField(auto_now=True)        #현재 시간 자동 생성
+    post = models.ForeignKey(Post,on_delete=models.CASCADE) 
+    body = models.CharField('댓글 작성하기',max_length=150)  #'댓글 작성하기'을 준 이유는 나중에 label이름을 body가 아닌 댓글 작성하기로 바꾸기 위해서.
+    created_at = models.DateTimeField(auto_now_add=True)    # 수정은 하지 않고, 삭제만 주기
 
 
-    def __str__(self):         #모델 클래스의 객체의 문자열 표현을 리턴한다.
+    def __str__(self):        
         return self.body

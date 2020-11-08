@@ -1,5 +1,5 @@
 from django.contrib import admin
-from board.models import Post, Comment
+from board.models import Post, Comment,Category,Mini_Category
 from django_summernote.admin import SummernoteModelAdmin
 from import_export.admin import ExportActionModelAdmin, ImportExportMixin, ImportMixin 
 
@@ -15,3 +15,7 @@ admin.site.register(Post,PostAdmin)
 
 
 admin.site.register(Comment)
+
+admin.site.register(Mini_Category)
+
+admin.site.register(Category)

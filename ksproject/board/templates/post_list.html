@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/post_list.css' %}">
+{% block title %}<title>{{mini_category}}</title>{% endblock title %}
+{% endblock head %}
+
+
+
+{% block content %}
+<h1>{{mini_category}} </h1>
+<div class="p"><a href="{% url 'create' mini_category.id %}">글 작성하기 </a></div>
+{% for post in  category_post_list %}
+
+<div class="post_wrapper">
+    <p>{{post.title}}</p>
+    <p>{{post.content|safe}}</p>
+    <!--filter safe -->
+    <p>
+        <img src="{{post.myimage.url}}" title="첨부 이미지" alt="게시판 글 이미지">
+    </p>
+    
+</div>
+
+
+{% endfor %}
+
+
+
+
+
+{% endblock content %}
+
