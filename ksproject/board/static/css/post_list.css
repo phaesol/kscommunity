@@ -5,6 +5,7 @@ html {
     font-size: 10px;
     min-width: 320px;
     min-height: 571px;
+    font-family: 'IBMPlexSansKR-Regular';
 
 }
 
@@ -14,6 +15,7 @@ html {
     font-weight: normal;
     font-style: normal;
 }
+
 
 
 .post_wrapper {
@@ -33,15 +35,28 @@ html {
     /* 네모 길이 직사각형으로 만들어 주었음. 가로 세로  */
     border: 1px solid black;
     /* 윤곽선 굵기, 스타일, 색깔  */
-
+    
+   
+   
+  
+ 
 }
 
 .post_wrapper p {
-    /*상속 post_wrapper 안에 있는 p 태그 또는 클래스*/
-    flex: 1;
-    font-family: 'IBMPlexSansKR-Regular';
-
+    
+   font-size: 1.5rem;
+  
+   
 }
+
+/* .content p{
+    width: 40%;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+ 
+} */
+
 
 img {
     width: 5vw;
@@ -52,7 +67,7 @@ img {
 
 h1 {
 
-    font-family: 'IBMPlexSansKR-Regular';
+ 
     margin-top: 100px;
     margin-bottom: 50px;
     text-align: center;
@@ -118,6 +133,24 @@ a {
 
 
 .paging {
-    margin: 40px 680px;
-
+    margin: 40px 0;
+    font-size: 15px;
+    width: 100%;
+    
 }
+
+.step-links{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+.current{
+    margin: 0 10px;
+}
+
+
+
+
