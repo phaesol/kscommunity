@@ -17,12 +17,12 @@
 
 <div class="post_wrapper">
     <a href="{% url 'detail' post.id %}">
-    <p class="title">{{post.title}}</p>
-    <p class="content">{{post.content|safe}}</p>
-    {% if post.image %}
-    <p class="image">
+    <div class="title">{{post.title}}</div>
+    <div class="content">{{post.content|safe}}</div>
+    {% if post.myimage %}
+    <div class="image">
         <img src="{{post.myimage.url}}" title="첨부 이미지" alt="게시판 글 이미지">
-    </p>
+    </div>
     {% endif %}
     </a>
 </div>

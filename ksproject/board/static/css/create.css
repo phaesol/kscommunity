@@ -88,7 +88,7 @@ html {
     justify-content: center;
     display: flex;
     flex-direction: row;
-    margin-top: 35rem;
+    
 }
 
 
@@ -110,7 +110,7 @@ html {
     border: 2px solid rgb(141, 141, 141);
     border-radius: 2rem;
     height: 25px;
-    padding: 12 10;
+    padding: 3px 12px;
 
 }
 

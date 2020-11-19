@@ -21,48 +21,67 @@ html {
 .post_wrapper {
 
     display: flex;
-    /* 밑의 자식 요소들 관리하기 위해! 여기서는 p 태그에 적용 ! 이 옵션을 주게 되면 제목 내용 이미지가 하나하나 간격 이쁘게 가짐. */
     margin: 10px auto;
-    /* 게시물 위아래 간격과 좌우는 auto를 주게 되면 알아서 가운데 정렬 잘 됨.  */
     padding: 0px 40px;
-    /* 마찬가지로 상자 안의 간격 조절  */
-    justify-content: center;
-    /* 글자 수평 정렬 ( 여기서는 패딩에 미리 줘버려서 별 효과 없긴하지만.. )  */
-    align-items: center;
-    /* 글자 수직 정렬  */
     width: 80vw;
     height: 15vh;
-    /* 네모 길이 직사각형으로 만들어 주었음. 가로 세로  */
     border: 1px solid black;
-    /* 윤곽선 굵기, 스타일, 색깔  */
-    
-   
-   
-  
+    font-size: 1.3rem;
  
 }
 
-.post_wrapper p {
+
+
+/* .post_wrapper p {
     
    font-size: 1.5rem;
   
    
+} */
+
+.post_wrapper a{
+    display: flex;
+    width: 100%;
+    align-items: center;
+   
 }
 
-/* .content p{
-    width: 40%;
+.title{
+    width: 15%;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
- 
-} */
+
+}
 
 
-img {
-    width: 5vw;
-    height: 10vh;
-    float: right;
+.content{
+    padding-left: 10%;
+    width: 60%; 
+   
+}
 
+.content p{
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
+}
+
+.image{
+    padding-left: 5%;
+    width: 70px;
+    height: 70px;
+    align-items: center;
+    object-fit: cover; 
+}
+
+
+.image>img {
+    
+   
+    width: 70px;
+    height: 70px;
 }
 
 h1 {

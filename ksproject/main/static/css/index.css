@@ -21,29 +21,7 @@ html {
     text-decoration: none;
 }
 
-/* .content{
 
-    width: 200px; 
-    height: 200px; 
-    border: 1px solid black; 
-    border-radius: 2px;
-    display: inline-flex;
-    
-    text-align: center;
-    justify-content: center;
-    margin : 100px 10px 10px 0px;       위오른쪽아래왼쪽
-    
-
-
-} */
-/* a{
-    padding: 10px;
-    text-decoration : none;
-}
-p{
-    font-family: 'IBMPlexSansKR-Regular';
-    
-} */
 
 nav {
     width: 100%;
@@ -71,11 +49,16 @@ nav {
     font-size: 1.6rem;
     align-items: center;
     justify-content: center;
-
+    
     width: 10%;
 
 
 }
+
+.category-bar-logo a{
+    color:white;
+}
+
 
 .category-bar {
     display: flex;
@@ -92,59 +75,41 @@ nav {
 
 .nav-container {
     width: 100%;
-    height: 65%;
+    height: 70%;
     border-bottom: 2px solid #A2C0A4;
     display: flex;
     font-size: 1.4rem;
     margin: 0;
-    padding: 0;
+    padding-left: 10%;
 
 }
+
 
 .nav-item {
     display: flex;
     flex-direction: column;
-}
-
-
-
-/* .community,
-.promotion,
-.impormation,
-.life {
-    display: flex;
-    flex-direction: column;
-    width: 15%;
-    height: 100%;
-    align-items: center;
-
-    margin-left: 3%;
-    padding-top: 10px;
-}
-
-.community {
-    padding-left: 8%;
-
-}
-
-.promotion,
-.impormation,
-.life {
-    margin-left: 2%;
-} */
-
-.nav-item {
-    width: 100%;
-    height: 20%;
+    
+    width: 17%;
     text-align: center;
 }
 
 
 .nav-item a {
     color: black;
+    margin-top: 10px;
 }
 
 
 .nav-item a:hover {
     color: #A2C0A4;
 }
+
+/* 상속이 더 강하기 때문에 위에랑
+똑같이 적어주어야함. 
+nav-item 적어줘서 상속해줌.  */
+.nav-item a.active {
+    
+    color: #A2C0A4;
+    font-weight: bold;
+}
+

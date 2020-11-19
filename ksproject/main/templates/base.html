@@ -46,7 +46,7 @@
             <div class="nav-item">
                 {% for mini_category in category.mini_category.all %}  
             
-                    <a href="{% url 'post_list' mini_category.id %}">{{mini_category.title}}</a>
+                    <a class="active" href="{% url 'post_list' mini_category.id %}">{{mini_category.title}}</a>
                 {% endfor %}
                   </div> 
             {% endfor %}
@@ -56,22 +56,24 @@
             
             </ul>
            
-            
-
-    
-  
-  
-         
-    
-
     </nav>
     {% endblock sidebar %}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+    </script>
+   <script type="text/javascript">
+    var loc = window.location.pathname;
+
+     $('.nav-item').find('a').each(function() {
+       $(this).toggleClass('active', $(this).attr('href') == loc);
+    });
+
+   
+    </script>
     {% block content %}
 
     {% endblock content %}
 
-
-
+  
 
 </body>
 
