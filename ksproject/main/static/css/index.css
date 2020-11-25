@@ -74,7 +74,7 @@ nav {
 /*바텀 네브바*/
 
 .nav-container {
-    width: 100%;
+    width: 90%;
     height: 70%;
     border-bottom: 2px solid #A2C0A4;
     display: flex;
@@ -89,7 +89,7 @@ nav {
     display: flex;
     flex-direction: column;
     
-    width: 17%;
+    width: 19%;
     text-align: center;
 }
 

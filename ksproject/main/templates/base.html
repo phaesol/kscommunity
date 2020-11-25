@@ -34,6 +34,11 @@
                 </li>
                 {% endfor %}
                    
+        <form method="GET" action="{% url 'search' %}">
+            
+            <input type="search" placeholder="검색하기" aria-label="Search" name="result" value="{{result}}" id="search">
+            <button type="submit">Search</button> 
+        </form>
         </ul>
                
                    
@@ -46,7 +51,7 @@
             <div class="nav-item">
                 {% for mini_category in category.mini_category.all %}  
             
-                    <a class="active" href="{% url 'post_list' mini_category.id %}">{{mini_category.title}}</a>
+                    <a href="{% url 'post_list' mini_category.id %}">{{mini_category.title}}</a>
                 {% endfor %}
                   </div> 
             {% endfor %}
@@ -65,6 +70,14 @@
 
      $('.nav-item').find('a').each(function() {
        $(this).toggleClass('active', $(this).attr('href') == loc);
+    });
+
+    $('form').on('submit',function(e){
+        if($('input#search').val().length < 2){
+            e.preventDefault();
+            var alertMsg = '검색어는 한자 이상입력해주세요.'
+            alert(alertMsg);
+        }
     });
 
    

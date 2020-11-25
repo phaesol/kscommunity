@@ -124,6 +124,7 @@ html {
 }
 
 
+
 /*.form-wrapper 안에 있는 input요소인 input-box 상속*/
 .form-wrapper .input-box input:focus {
     outline: none;

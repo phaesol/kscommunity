@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404,get_list_or_404
 from .forms import PostForm
 from .models import Post,Category,Mini_Category
 from django.core.paginator import Paginator
-# from django.urls import reverse_lazy
+from django.contrib import messages
 
 
 
@@ -13,8 +13,6 @@ def create(request,mini_category_id):
     categories = Category.objects.all()   
     context['categories'] = categories    
 
-    mini_category = get_object_or_404(Mini_Category,id=mini_category_id)  
-    context['mini_category'] = mini_category
 
     if request.method=="POST":
         post_form = PostForm(request.POST, request.FILES) 
@@ -30,7 +28,7 @@ def create(request,mini_category_id):
         return render(request,'create.html',context)    
 
 
-def post_list(request,mini_category_id): #여기서도 각각의 미니카테고리 아이디 가져올거임.
+def post_list(request,mini_category_id):
     context=dict()
     
     categories = Category.objects.all()
@@ -41,7 +39,7 @@ def post_list(request,mini_category_id): #여기서도 각각의 미니카테고
     context['mini_category'] = mini_category
 
 
-    category_post_list = Post.objects.filter(category=mini_category)
+    category_post_list = Post.objects.filter(category=mini_category).order_by('-id')
     context['category_post_list'] =category_post_list                  
     
     paginator = Paginator(category_post_list, 10) # 하나의 페이지당 10개의 오브젝트들을 보여줌.
@@ -65,6 +63,33 @@ def detail(request,post_id):
 
     return render(request,'detail.html',context)
 
+def search(request):
+    context = dict()
+
+    categories = Category.objects.all()
+    context['categories'] = categories
+
+    
+
+    post_list = Post.objects.all().order_by('-id')
+    
+    
+    search_keyword = request.GET.get("result","")
+
+    if search_keyword :
+        
+        post_list = post_list.filter(title__icontains = search_keyword) | post_list.filter(content__icontains = search_keyword)
+        
+        paginator = Paginator(post_list, 10)
+        page_number = request.GET.get('page') 
+        page_obj = paginator.get_page(page_number) 
+        context['page_obj'] = page_obj
+        context['post_list'] = post_list
+        context ['search_keyword'] = search_keyword
+        return render(request,'search.html',context)
+       
+    else:
+        return render(request,'search.html',context)
 
 
 

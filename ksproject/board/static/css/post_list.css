@@ -25,7 +25,7 @@ html {
     padding: 0px 40px;
     width: 80vw;
     height: 15vh;
-    border: 1px solid black;
+    border: 1px solid rgb(105, 105, 105);
     font-size: 1.3rem;
  
 }
@@ -43,6 +43,7 @@ html {
     display: flex;
     width: 100%;
     align-items: center;
+    color: black;
    
 }
 
@@ -129,23 +130,23 @@ a {
 
 /* 
 게시물 링크 색깔 */
-.post a:link {
+.post,.post_wrapper a:link {
 
     color: #000000;
 }
 
-.post a:visited {
+.post,.post_wrapper a:visited {
 
     color: #949494;
 }
 
 
-.post a:hover {
+.post,.post_wrapper a:hover {
 
     color: #949494;
 }
 
-.post a:active {
+.post,.post_wrapper a:active {
 
     color: #333333;
 }
