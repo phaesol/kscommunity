@@ -19,6 +19,8 @@ html {
 * {
     list-style: none;
     text-decoration: none;
+    outline: none;
+    font-family: 'IBMPlexSansKR-Regular';
 }
 
 
@@ -44,7 +46,7 @@ nav {
 }
 
 .category-bar-logo {
-    font-size: 1.6rem;
+   
     display: flex;
     font-size: 1.6rem;
     align-items: center;
@@ -112,4 +114,53 @@ nav-item 적어줘서 상속해줌.  */
     color: #A2C0A4;
     font-weight: bold;
 }
+
+
+/* 검색부분 */
+
+form{
+    width: 20%;
+    height: 100%;
+    display: flex;
+}
+
+
+#search{
+ border-style: none;
+ width: 60%;
+ height: 30px;
+ border-radius: 5px;
+ align-self: center;
+ padding-left: 10px;
+
+}
+
+#search:focus{
+    border: 2px solid rgb(202, 202, 202);
+    border-radius: 5px;
+    
+}
+
+input:focus::-webkit-input-placeholder {
+    color: white;
+  }
+
+#search-btn{
+  
+    border-style: none;
+    background-color:  #A2C0A4;
+    color: white;
+    background: url(search.png);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+    cursor: pointer;
+    width: 20%;
+    height: 50%;
+    align-self: center;
+
+}
+
+
+
 

@@ -1,11 +1,10 @@
 {% extends 'post_list.html' %}
 {% load static %}
-{% load board_extras %}
+
 
 {% block content %}
 
-<h1><a href="{{ request.META.HTTP_REFERER }}">뒤로가기</a>
-</h1>
+<h1>"{{search_keyword}}" 검색결과</h1>
    
     {% if not post_list %}
     <h1> 검색 결과가 없습니다. </h1>

@@ -37,7 +37,7 @@
         <form method="GET" action="{% url 'search' %}">
             
             <input type="search" placeholder="검색하기" aria-label="Search" name="result" value="{{result}}" id="search">
-            <button type="submit">Search</button> 
+            <input type="submit" id="search-btn" value=""> 
         </form>
         </ul>
                
@@ -75,10 +75,12 @@
     $('form').on('submit',function(e){
         if($('input#search').val().length < 2){
             e.preventDefault();
-            var alertMsg = '검색어는 한자 이상입력해주세요.'
+            var alertMsg = '검색어는 두 글자 이상 입력해주세요!'
             alert(alertMsg);
         }
     });
+
+    
 
    
     </script>
