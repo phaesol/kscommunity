@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'board',
     'django_summernote',
     'import_export',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+AUTH_USER_MODEL = 'account.CommunityUser'
+

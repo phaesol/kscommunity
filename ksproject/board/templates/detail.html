@@ -12,6 +12,7 @@
 
 {% block content %}
 <a href="{{ request.META.HTTP_REFERER }}">뒤로가기</a>
+<div class="category">{{my_post.category}}</div>
 <div class="title">제목: {{my_post.title}}</div>
 <div class="content">내용 : {{my_post.content|safe}}</div>
 {% if my_post.myimage %}
@@ -19,6 +20,8 @@
         <img src="{{my_post.myimage.url}}" title="첨부 이미지" alt="게시판 글 이미지">
     </div>
     {% endif %}
+
+
 
 <form method="POST" action="{% url 'create_comment' my_post.id %}" class="comment-form">
     {% csrf_token %}

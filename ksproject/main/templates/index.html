@@ -3,6 +3,75 @@
 
 {% block content %}
 
+<div class="category-post">
+    <div class="category-title">{{mini_1}}</div>
+    <div class="post_list">
+    
+        {% for i in post_1 %}
+        <a href="{% url 'detail' i.id %}">{{i}}</a>
+        {% endfor %}
+    
+    </div>
+</div>
+
+<div class="category-post">
+    <div class="category-title">{{mini_2}}</div>
+    <div class="post_list">
+    
+        {% for i in post_2 %}
+        <a href="{% url 'detail' i.id %}">{{i}}</a>
+        {% endfor %}
+    
+    </div>
+</div>
+
+
+<div class="category-post">
+    <div class="category-title">{{mini_5}}</div>
+    <div class="post_list">
+    
+        {% for i in post_5 %}
+        <a href="{% url 'detail' i.id %}">{{i}}</a>
+        {% endfor %}
+    
+    </div>
+</div>
+
+
+<div class="category-post">
+    <div class="category-title">{{mini_8}}</div>
+    <div class="post_list">
+    
+        {% for i in post_8 %}
+        <a href="{% url 'detail' i.id %}">{{i}}</a>
+        {% endfor %}
+    
+    </div>
+</div>
+
+<div class="category-post">
+    <div class="category-title">{{mini_9}}</div>
+    <div class="post_list">
+    
+        {% for i in post_9 %}
+        <a href="{% url 'detail' i.id %}">{{i}}</a>
+        {% endfor %}
+    
+    </div>
+</div>
+
+
+<div class="category-post">
+    <div class="category-title">{{mini_13}}</div>
+    <div class="post_list">
+    
+        {% for i in post_13 %}
+        <a href="{% url 'detail' i.id %}">{{i}}</a>
+        {% endfor %}
+    
+    </div>
+</div>
+
 
 
 
