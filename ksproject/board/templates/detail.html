@@ -5,14 +5,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/create.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
 {% endblock head %}
 
 
 
 {% block content %}
 <a href="{{ request.META.HTTP_REFERER }}">뒤로가기</a>
-<br><br>제목: {{my_post.title}}
-<br><br>내용 : {{my_post.content|safe}}
+<div class="title">제목: {{my_post.title}}</div>
+<div class="content">내용 : {{my_post.content|safe}}</div>
+{% if my_post.myimage %}
+    <div class="image">
+        <img src="{{my_post.myimage.url}}" title="첨부 이미지" alt="게시판 글 이미지">
+    </div>
+    {% endif %}
+
+<form method="POST" action="{% url 'create_comment' my_post.id %}" class="comment-form">
+    {% csrf_token %}
+    {{comment_form}}
+    <input type="submit">
+</form>
+
+<div class="comment-wrapper">
+    {% for comment in my_post.comment_set.all %}
+    <div class="comment">{{comment.body}}</div>
+    <div class="comment-time">{{comment.created_at}}</div>
+    <div class="delete-comment">
+        <a href="{% url 'delete_comment' my_post.id comment.id %}">삭제</a>
+    </div>
+    <!-- 나중에 클릭하면 대댓글 폼 나타나게 구현하기 -->
+    <div class="recomment-btn">대댓글</div>
+        <form method="POST" action="{% url 'create_recomment' my_post.id comment.id %}" class="recomment-form">
+            {% csrf_token %}
+            {{recomment_form}}
+            <input type="submit">
+        </form>
+        {% for recomment in comment.recomment.all %}
+            <div class="recomment">대댓글:{{recomment.body}}</div>
+            <div class="recomment-time">{{recomment.created_at}}</div>
+            <div class="delete-recomment">
+                <a href="{% url 'delete_recomment' my_post.id recomment.id %}">삭제</a>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+</script>
+<script>
+    $('.delete-comment').click(function(){
+        
+        alert('댓글을 정말 삭제하시겠습니까?');
+    });
+</script>
+
+
+
 
 {% endblock content %}

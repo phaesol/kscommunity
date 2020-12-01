@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post,Comment    #Comment 불러오기
+from .models import Post,Comment ,ReComment  
 from django_summernote.widgets import SummernoteWidget     
 
 
@@ -23,3 +23,8 @@ class CommentForm(forms.ModelForm):
         fields = ('body', )
 
 
+class ReCommentForm(forms.ModelForm):
+    class Meta:
+        model = ReComment
+
+        fields = ('body',)

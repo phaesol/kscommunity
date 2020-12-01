@@ -6,7 +6,7 @@
 
 <h1>"{{search_keyword}}" 검색결과</h1>
    
-    {% if not post_list %}
+    {% if not page_obj %}
     <h1> 검색 결과가 없습니다. </h1>
     {% else %}
 
@@ -39,7 +39,7 @@
             <div class="previous">
             {% if page_obj.has_previous %}
                 
-                <a href="?result={{ search_keyword  }}&page={{ page_obj.previous_page_number }}">이전</a>
+                <a href="?result={{ search_keyword }}&page={{ page_obj.previous_page_number }}">이전</a>
             {% endif %}
             </div>
     

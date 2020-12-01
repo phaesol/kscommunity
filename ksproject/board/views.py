@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404,get_list_or_404
-from .forms import PostForm
-from .models import Post,Category,Mini_Category
+from .forms import PostForm,CommentForm,ReCommentForm
+from .models import Post,Category,Mini_Category,Comment,ReComment
 from django.core.paginator import Paginator
 from django.contrib import messages
 
@@ -61,6 +61,11 @@ def detail(request,post_id):
     my_post =get_object_or_404(Post,id=post_id)
     context['my_post'] = my_post
 
+   
+    
+    context['comment_form'] = CommentForm()
+    context['recomment_form'] = ReCommentForm()
+
     return render(request,'detail.html',context)
 
 def search(request):
@@ -94,3 +99,35 @@ def search(request):
 
 
 
+def create_comment(request,post_id):
+    com_form = CommentForm(request.POST)
+    if com_form.is_valid():
+        comment_form = com_form.save(commit=False)
+        comment_form.post = Post.objects.get(id=post_id)
+        comment_form.save()
+    
+    return redirect('detail',post_id)
+
+
+def delete_comment(request,post_id,com_id):
+    
+    my_com = Comment.objects.get(id=com_id)
+    my_com.delete()
+    return redirect('detail',post_id)
+
+
+
+def create_recomment(request,post_id,com_id):
+    re_com_form = ReCommentForm(request.POST)
+    if re_com_form.is_valid():
+        recomment_form = re_com_form.save(commit=False)
+        recomment_form.comment = Comment.objects.get(id=com_id)
+        recomment_form.save()
+    
+    return redirect('detail',post_id)
+
+
+def delete_recomment(request,post_id,com_id):
+    my_recom = ReComment.objects.get(id=com_id)
+    my_recom.delete()
+    return redirect('detail',post_id)

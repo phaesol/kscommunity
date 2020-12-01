@@ -31,3 +31,9 @@ class Comment(models.Model):
 
     def __str__(self):        
         return self.body
+
+
+class ReComment(models.Model):
+    comment = models.ForeignKey(Comment,on_delete=models.CASCADE,related_name="recomment")
+    body = models.CharField('',max_length=150) #대댓글은 이름일단 없앰.
+    created_at = models.DateTimeField(auto_now_add=True)
