@@ -1,26 +1,32 @@
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
 from django.db import models 
+from django.core.exceptions import ValidationError
 
 
 class UserManager(BaseUserManager):    
     
     use_in_migrations = True    
     
+
+
     def create_user(self, email, nickname, password=None):        
         #유저 생성 시 실행되는 함수
         if not email :            
             raise ValueError('이메일은 필수입니다!')        
-        
-        user = self.model(
+      
+            user = self.model(
             #이메일 입력시 대소문자 구분 없기 위함.            
             email = self.normalize_email(email),            
             nickname = nickname,     
-        )  
+        ) 
+
         #비밀번호에 해시값으로 저장 후 해시값과 기존 값 비교하여 보안 동시에 입력값과 비교.       
         user.set_password(password)        
         user.save(using=self._db)   
 
-        return user       
+        return user      
+
+   
     
     def create_superuser(self, email, nickname,password ):        
         #슈퍼유저 생성
@@ -33,20 +39,26 @@ class UserManager(BaseUserManager):
         user.is_superuser = True        
         user.is_staff = True        
         
-        #여기서는 슈퍼유저라 해싱할지말지..흠멈머
+        
         user.save(using=self._db)        
         return user 
 
+
+#PermissionsMixin - : 기본 그룹, 허가권 관리 기능 재사용
 class CommunityUser(AbstractBaseUser,PermissionsMixin):    
     #헬퍼 클래스 지정
     
     objects = UserManager()
+
+   
     
     email = models.EmailField(        
-        max_length=100,        
+        max_length=100,
+        null=False,      
         unique=True,
         verbose_name="이메일"   
-    )    
+    )
+        
     nickname = models.CharField(
         max_length=10,
         null=False,
@@ -69,5 +81,10 @@ class CommunityUser(AbstractBaseUser,PermissionsMixin):
     REQUIRED_FIELDS = ['email']
 
     class Meta:
+        
+        verbose_name = ("user")
+        verbose_name_plural = ("users")
+        
+        
         def __str__(self):
             return self.email

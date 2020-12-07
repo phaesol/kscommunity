@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+from ksproject import custom_settings
 import os, json
 from django.core.exceptions import ImproperlyConfigured
 
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'import_export',
     'account',
+    'six',
 ]
 
 MIDDLEWARE = [
@@ -159,3 +160,16 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 AUTH_USER_MODEL = 'account.CommunityUser'
 
+# 이메일 설정
+EMAIL_BACKEND =custom_settings.EMAIL['EMAIL_BACKEND']
+EMAIL_USE_TLS =custom_settings.EMAIL['EMAIL_USE_TLS']
+EMAIL_PORT =custom_settings.EMAIL['EMAIL_PORT']
+EMAIL_HOST =custom_settings.EMAIL['EMAIL_HOST']
+EMAIL_HOST_USER =custom_settings.EMAIL['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD =custom_settings.EMAIL['EMAIL_HOST_PASSWORD']
+SERVER_EMAIL = custom_settings.EMAIL['SERVER_EMAIL']
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# 로그인,로그아웃 시 리디렉트 시켜줄 위치를 명시
+LOGIN_REDIRECT_URL = '/'  			
+LOGOUT_REDIRECT_URL = '/'

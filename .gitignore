@@ -2,3 +2,4 @@ __pycache__
 myvenv/
 db.sqlite3
 secrets.json
+custom_settings.py
