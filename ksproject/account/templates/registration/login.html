@@ -1,0 +1,18 @@
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{form_as.p}}
+    <button type="submit">로그인</button>
+</form>
+<!-- 로그인 관련 실패 에러창 메세지 -->
+{% if messages %}
+
+    {% for message in messages %}
+        {% if meesage.tags %}
+        {{message.tags}}
+        {% endif %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
+
+
+<p><a href="{% url 'signup' %}">아직 회원이 아니시라면?</a></p>

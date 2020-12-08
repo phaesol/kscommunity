@@ -1,0 +1,15 @@
+<form method="POST" action="{% url 'signup' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">다음으로(회원가입)</button>
+</form>
+<!-- 닉네임 중복 확인 기능 및 비밀번호 유효성 메세지 처리 한번 더 보기 -->
+{% if messages %}
+
+    {% for message in messages %}
+        {% if meesage.tags %}
+        {{message.tags}}
+        {% endif %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
