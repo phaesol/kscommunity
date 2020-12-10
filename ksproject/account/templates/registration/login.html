@@ -1,6 +1,6 @@
 <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
-    {{form_as.p}}
+    {{form.as_p}}
     <button type="submit">로그인</button>
 </form>
 <!-- 로그인 관련 실패 에러창 메세지 -->

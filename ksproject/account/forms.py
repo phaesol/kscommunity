@@ -69,10 +69,16 @@ class SignUpForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
+    error_messages = {
+        'invalid_login': '로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.',
+        'inactive': "로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.",
+    }
+    
     def __init__(self,*args,**kwargs):
-        super(SignUpForm,self).__init__(*args,**kwargs)
+        super(LoginForm,self).__init__(*args,**kwargs)
 
         UserModel = CommunityUser
+        
 
 
 
@@ -80,9 +86,10 @@ class NicknameUpdateForm(forms.ModelForm):
     class Meta:
         model = CommunityUser
         fields = ['nickname',]
+        
 
 
-class PasswordupdateForm(PasswordChangeForm):
+class PasswordUpdateForm(PasswordChangeForm):
 
     old_password = forms.CharField(
         label='기존 비밀번호',

@@ -6,7 +6,7 @@ from django.shortcuts import resolve_url, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView
 
-from .forms import SignUpForm, LoginForm, NicknameUpdateForm, PasswordupdateForm,PasswordResetForm,NewPasswordSetForm
+from .forms import SignUpForm, LoginForm, NicknameUpdateForm, PasswordUpdateForm,PasswordResetForm,NewPasswordSetForm
 from .models import CommunityUser
 from board.models import Post,Mini_Category
 
@@ -83,7 +83,7 @@ class SuccessSignUpView(TemplateView):
 class ActivateView(TemplateView):
     template_name = 'registration/activate.html'
 
-    def get(self,request, uid64, token):
+    def get(self,request, uidb64, token):
         try:
             uid = force_text(urlsafe_base64_decode(uidb64)) # 위 uidb64 디코딩
             user = CommunityUser.objects.get(pk=uid) #user pk=uid 확인
@@ -115,7 +115,7 @@ class LoginView(LoginView):
         return resolve_url(settings.LOGIN_REDIRECT_URL) #settings 에 있는 해당 url (index 페이지) 로 넘어가기
 
     def form_invalid(self, form):
-        message.error(self.request, '로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.', extra_tags='danger')
+        messages.error(self.request, '로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.', extra_tags='danger')
         return super().form_invalid(form)
 
 
@@ -125,10 +125,10 @@ class LoginView(LoginView):
 class UpdateMyPageView(TemplateView):
 
     template_name = 'mypage/update_mypage.html'
+    
+    def get_context_data(self, **kwargs):
 
-    def get_context_data(self,**kwargs):
-
-        context = super(UpdateMyPageView,self).get_context_data(**kwargs)
+        context = super(UpdateMyPageView, self).get_context_data(**kwargs)
 
         context['nickname_form'] = NicknameUpdateForm(
             instance= self.request.user,
@@ -138,7 +138,7 @@ class UpdateMyPageView(TemplateView):
 
 
         context['password_form'] = PasswordUpdateForm(
-            instance= self.request.user,
+            user= self.request.user,
             prefix = 'password_form', #접두사 사용
             data = self.request.POST if 'password_form-submit' in self.request.POST else None,
         )
@@ -152,14 +152,14 @@ class UpdateMyPageView(TemplateView):
 
         if context['nickname_form'].is_valid():
             context['nickname_form'].save()
-            message.success(request,'닉네임 변경 완료')
+            messages.success(request,'닉네임 변경 완료')
 
         elif context['password_form'].is_valid():
             context['password_form'].save()
-            message.success(request,'비밀번호 변경 완료')
+            messages.success(request,'비밀번호 변경 완료')
 
         else:
-            message.error(request,'저장되지 않았습니다. 다시 확인해주세요.')
+            messages.error(self.request,'저장되지 않았습니다. 다시 확인해주세요.')
 
         return self.render_to_response(context)
 
@@ -202,7 +202,7 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        message.error(self.request, '새 비밀번호 생성에 실패했습니다. 다시 시도해주세요. ', extra_tags='danger')
+        messages.error(self.request, '새 비밀번호 생성에 실패했습니다. 다시 시도해주세요. ', extra_tags='danger')
         return super().form_invalid(form)
 
 

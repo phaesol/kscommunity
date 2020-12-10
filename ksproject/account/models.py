@@ -77,8 +77,8 @@ class CommunityUser(AbstractBaseUser,PermissionsMixin):
     last_login = models.DateTimeField(verbose_name="last_login",auto_now = True)
     
     
-    USERNAME_FIELD = 'nickname'    
-    REQUIRED_FIELDS = ['email']
+    USERNAME_FIELD = 'email'    
+    REQUIRED_FIELDS = ['nickname']
 
     class Meta:
         
