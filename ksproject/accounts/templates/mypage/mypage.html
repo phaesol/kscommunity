@@ -1,10 +1,11 @@
 <a href="{% url 'logout' %}">로그아웃</a>
 
-
-{% if user.pk is pk%}
+<!-- 비교필요 -->
+{% if user.pk is pk %}
 
 내가 쓴 글
 좋아요한글
 댓글단 글
+{% endif %}
 
 <a href="{% url 'update_mypage' user.pk %}">정보 수정</a>

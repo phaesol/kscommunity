@@ -22,6 +22,13 @@
     {% endif %}
 
 
+<div class="time">{{my_post.updated_at}}</div>
+<div class="user">{{my_post.writer}}</div>
+<!-- 해당 포스트 작성유저가 현재 요청된 유저의 닉네임과 같을때 -->
+{% if my_post.writer == user.nickname %}
+<a href="{% url 'update_post' my_post.id %}">수정하기</a>
+{% endif %}
+
 
 <form method="POST" action="{% url 'create_comment' my_post.id %}" class="comment-form">
     {% csrf_token %}

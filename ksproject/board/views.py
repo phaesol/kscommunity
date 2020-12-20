@@ -2,11 +2,11 @@ from django.shortcuts import render,redirect,get_object_or_404,get_list_or_404
 from .forms import PostForm,CommentForm,ReCommentForm
 from .models import Post,Category,Mini_Category,Comment,ReComment
 from django.core.paginator import Paginator
+from accounts.models import CommunityUser
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
-
-
-
-
+@login_required
 def create(request,mini_category_id): 
     context = dict()
     
@@ -18,8 +18,12 @@ def create(request,mini_category_id):
         post_form = PostForm(request.POST, request.FILES) 
         
         if post_form.is_valid():
+            post_user = request.user
+            user = CommunityUser.objects.get(email=post_user)
+            user_nickname = user.nickname
             category_form = post_form.save(commit=False) 
-            category_form.category = Mini_Category.objects.get(id=mini_category_id) 
+            category_form.category = Mini_Category.objects.get(id=mini_category_id)
+            category_form.writer =  user_nickname
             category_form.save() 
             return redirect('post_list',mini_category_id)
       
@@ -49,9 +53,10 @@ def post_list(request,mini_category_id):
     return render(request,'post_list.html',context)
 
 
-
+@login_required
 def detail(request,post_id):
     context = dict()
+   
 
     categories = Category.objects.all()
     context['categories'] = categories
@@ -67,6 +72,27 @@ def detail(request,post_id):
     context['recomment_form'] = ReCommentForm()
 
     return render(request,'detail.html',context)
+
+@login_required
+def update_post(request,post_id):
+    context = dict()
+    
+    my_post = Post.objects.get(id=post_id)
+    post_form = PostForm(instance=my_post)
+    context['post_form'] = post_form
+    categories = Category.objects.all()
+    context['categories'] = categories
+
+
+    if request.method == "POST":
+        update_form = PostForm(request.POST, request.FILES,instance=my_post) 
+        if update_form.is_valid():
+            update_form.save()
+            return redirect('detail',post_id)
+   
+    return render(request,'create.html',context)  
+
+    
 
 def search(request):
     context = dict()
@@ -98,7 +124,7 @@ def search(request):
 
 
 
-
+@login_required
 def create_comment(request,post_id):
     com_form = CommentForm(request.POST)
     if com_form.is_valid():
@@ -108,7 +134,7 @@ def create_comment(request,post_id):
     
     return redirect('detail',post_id)
 
-
+@login_required
 def delete_comment(request,post_id,com_id):
     
     my_com = Comment.objects.get(id=com_id)
@@ -116,7 +142,7 @@ def delete_comment(request,post_id,com_id):
     return redirect('detail',post_id)
 
 
-
+@login_required
 def create_recomment(request,post_id,com_id):
     re_com_form = ReCommentForm(request.POST)
     if re_com_form.is_valid():

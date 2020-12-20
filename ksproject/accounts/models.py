@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
 from django.db import models 
 from django.core.exceptions import ValidationError
-
+from board.models import Post
 
 class UserManager(BaseUserManager):    
     
@@ -14,11 +14,17 @@ class UserManager(BaseUserManager):
         if not email :            
             raise ValueError('이메일은 필수입니다!')        
       
-            user = self.model(
-            #이메일 입력시 대소문자 구분 없기 위함.            
-            email = self.normalize_email(email),            
-            nickname = nickname,     
+        user = self.model(
+        #이메일 입력시 대소문자 구분 없기 위함.            
+        email = self.normalize_email(email),            
+        nickname = nickname,     
         ) 
+
+        user.is_admin = False      
+        user.is_superuser = False      
+        user.is_staff = False
+        user.is_active = True     
+        
 
         #비밀번호에 해시값으로 저장 후 해시값과 기존 값 비교하여 보안 동시에 입력값과 비교.       
         user.set_password(password)        
@@ -27,7 +33,9 @@ class UserManager(BaseUserManager):
         return user      
 
    
-    
+
+
+
     def create_superuser(self, email, nickname,password ):        
         #슈퍼유저 생성
         user = self.create_user(            
@@ -38,7 +46,7 @@ class UserManager(BaseUserManager):
         user.is_admin = True        
         user.is_superuser = True        
         user.is_staff = True        
-        
+        user.is_active = True
         
         user.save(using=self._db)        
         return user 
@@ -65,7 +73,8 @@ class CommunityUser(AbstractBaseUser,PermissionsMixin):
         unique=True,
         verbose_name="닉네임"
     )   
-    #나중에 라이크 필드 추가
+    
+    likes = models.ManyToManyField(to=Post, related_name='likers')
       
     is_active = models.BooleanField(default=True)    
     is_admin = models.BooleanField(default=False)    

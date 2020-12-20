@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'board',
     'django_summernote',
     'import_export',
-    'account',
+    'accounts',
     'six',
 ]
 
@@ -158,7 +158,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
-AUTH_USER_MODEL = 'account.CommunityUser'
+AUTH_USER_MODEL = 'accounts.CommunityUser'
 
 # 이메일 설정
 EMAIL_BACKEND =custom_settings.EMAIL['EMAIL_BACKEND']

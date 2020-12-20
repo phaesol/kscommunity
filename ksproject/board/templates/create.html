@@ -11,7 +11,7 @@
 
 
 {% block content %}
-<form method="POST" , enctype="multipart/form-data" autocomplete="off">
+<form method="POST"  enctype="multipart/form-data" autocomplete="off" class="create_form">
     {% csrf_token %}
     <h1>{{mini_category}}</h1>
     {% for i in post_form %}

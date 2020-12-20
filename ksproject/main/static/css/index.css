@@ -117,8 +117,7 @@ nav-item 적어줘서 상속해줌.  */
 
 
 /* 검색부분 */
-
-form{
+.search-input{
     width: 20%;
     height: 100%;
     display: flex;

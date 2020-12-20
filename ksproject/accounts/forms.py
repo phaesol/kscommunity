@@ -12,60 +12,57 @@ class SignUpForm(UserCreationForm):
         model = CommunityUser
         fields = [ 'email','password1','password2','nickname',]
 
-        def clean(self,*args,**kwargs):
-            #cleaned_date : 유효성 검사를 마친 후 딕셔너리 타입으로 정의 - 뒤에 get 을 붙이면 키 값 불확실 하지 않을 때 사용.
-            #cleaned_date : 키에러 / cleaned_date.get() : None 반환
-            email = self.cleaned_data.get('email')
-            password1 = self.cleaned_data.get('password1')
-            password2 = self.cleaned_data.get('password2')
-            nickname = self.cleaned_data.get('nickname')
-          
-            
-            try:
-                CommunityUser.objects.get(email=email)
-                raise forms.ValidationError('이미 존재하는 이메일입니다.')
-            except CommunityUser.DoesNotExist:
-                pass
-            #잘못입력했을 경우
-            if email is None:
-                raise forms.ValidationError('올바른 이메일을 입력해주세요.')
-            #경성대 이메일이 아닌 경우, split 사용 @ 기준으로 나눠서 리스트 형태
-            if email.split('@')[1] != 'ks.ac.kr':
-                raise forms.ValidationError('경성대 이메일을 입력해주세요!')
-            
-            
-            #비밀번호 설정
-            try:
-                password_validation.validate_password(password1,self.instance)
-            except forms.ValidationError:
-                raise forms.ValidationError('8자 이상의 안전한 비밀번호로 설정해주세요.')
-            if password1 != password2:
-                raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
-
-            #닉네임 중복 확인
-            if len(nickname)==1 or len(nickname)>=8:
-                raise forms.ValidationError('닉네임은 2자 이상, 8자 이하입니다.')
-
-            try:
-                CommunityUser.objects.get(nickname=nickname)
-                raise forms.ValidationError("이미 존재하는 닉네임입니다.")
-            except CommunityUser.DoesNotExist:
-                pass
-
-            return self.cleaned_data
-
-        def save(self, commit=True,*args,**kwargs):
-            #signupform 호출하여 오버라이딩.완전히 저장하기전 보류함
-            user =super(SignUpForm, self).save(commit=False)
-
-            user.email = self.cleaned_data['email']
-            user.nickname = self.cleaned_data['nickname']
-            #메일 인증 후 활성화
-            user.is_active = False
+    def clean(self,*args,**kwargs):
+        #cleaned_data : 유효성 검사를 마친 후 딕셔너리 타입으로 정의 - 뒤에 get 을 붙이면 키 값 불확실 하지 않을 때 사용.
+        #cleaned_data : 키에러 / cleaned_data.get() : None 반환
+        email = self.cleaned_data.get('email')
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        nickname = self.cleaned_data.get('nickname')
+      
+        
+        try:
+            CommunityUser.objects.get(email=email)
+            raise forms.ValidationError('이미 존재하는 이메일입니다.')
+        except CommunityUser.DoesNotExist:
+            pass
+        #잘못입력했을 경우
+        if email is None:
+            raise forms.ValidationError('올바른 이메일을 입력해주세요.')
+        #경성대 이메일이 아닌 경우, split 사용 @ 기준으로 나눠서 리스트 형태
+        if email.split('@')[1] != 'ks.ac.kr':
+            raise forms.ValidationError('경성대 이메일을 입력해주세요!')
+        
+        
+        #비밀번호 설정
+        try:
+            password_validation.validate_password(password1,self.instance)
+        except forms.ValidationError:
+            raise forms.ValidationError('8자 이상의 안전한 비밀번호로 설정해주세요.')
+        if password1 != password2:
+            raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
+        #닉네임 중복 확인
+        if len(nickname)==1 or len(nickname)>=8:
+            raise forms.ValidationError('닉네임은 2자 이상, 8자 이하입니다.')
+        try:
+            CommunityUser.objects.get(nickname=nickname)
+            raise forms.ValidationError("이미 존재하는 닉네임입니다.")
+        except CommunityUser.DoesNotExist:
+            pass
+        return self.cleaned_data
+    
+    
+    def save(self, commit=True,*args,**kwargs):
+        #signupform 호출하여 오버라이딩.완전히 저장하기전 보류함
+        user = super(SignUpForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.nickname = self.cleaned_data['nickname']
+        #메일 인증 후 활성화
+        user.is_active = False
             #commit 있을 경우
-            if commit:
-                user.save()
-            return user
+        if commit:
+            user.save()
+        return user
 
 
 class LoginForm(AuthenticationForm):

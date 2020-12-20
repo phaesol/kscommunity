@@ -14,6 +14,7 @@ class Mini_Category(models.Model):
         return self.title
         
 class Post(models.Model):
+    writer = models.CharField(max_length=10)
     title = models.CharField(max_length=50)
     content = models.TextField()
     updated_at = models.DateTimeField(auto_now_add= True) # 최초 생성 날짜만 갱신
