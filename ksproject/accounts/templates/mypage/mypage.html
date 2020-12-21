@@ -1,11 +1,15 @@
 <a href="{% url 'logout' %}">로그아웃</a>
-
+<form method="POST" action="{%url 'mypage' user.pk%}">
 <!-- 비교필요 -->
-{% if user.pk is pk %}
+{% if user.is_authenticated %}
 
 내가 쓴 글
 좋아요한글
 댓글단 글
 {% endif %}
 
-<a href="{% url 'update_mypage' user.pk %}">정보 수정</a>
+<div class="update_mypage">
+    <a href="{% url 'update_nickname' user.pk %}">닉네임 수정하기</a>
+    <div>비밀번호 수정하기</div>
+</div>
+</form>

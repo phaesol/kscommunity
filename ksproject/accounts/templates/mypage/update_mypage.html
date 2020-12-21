@@ -1,6 +1,0 @@
-<form method="POST" action="{% url 'update_mypage' user.pk %}">
-    {% csrf_token %}
-    {{nickname_form}}
-    <!-- {{password_form}} -->
-    <button type="submit">정보 수정 완료</button>
-</form>

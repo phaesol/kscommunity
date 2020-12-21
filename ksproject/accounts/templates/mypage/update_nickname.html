@@ -1,0 +1,16 @@
+<form method="POST" action="{% url 'update_nickname' user.pk %}">
+    {% csrf_token %}
+    {{nickname_update_form}}
+    
+    <button type="submit">정보 수정 완료</button>
+</form>
+
+{% if messages %}
+
+    {% for message in messages %}
+        {% if meesage.tags %}
+        {{message.tags}}
+        {% endif %}
+        {{ message }}
+    {% endfor %}
+{% endif %}

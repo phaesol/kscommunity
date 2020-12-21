@@ -126,13 +126,20 @@ def search(request):
 
 @login_required
 def create_comment(request,post_id):
-    com_form = CommentForm(request.POST)
-    if com_form.is_valid():
-        comment_form = com_form.save(commit=False)
-        comment_form.post = Post.objects.get(id=post_id)
-        comment_form.save()
+    context = dict()
+    if request.method == "POST":
+        com_form = CommentForm(request.POST)
+        if com_form.is_valid():
+            com_user = request.user
+            user = CommunityUser.objects.get(email=post_user)
+            user_nickname = user.nickname
+            comment_form = com_form.save(commit=False)
+            comment_form.post = Post.objects.get(id=post_id)
+            comment_form.writer =  user_nickname
+            comment_form.save()
+
+            return redirect('detail',post_id)
     
-    return redirect('detail',post_id)
 
 @login_required
 def delete_comment(request,post_id,com_id):

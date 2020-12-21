@@ -2,9 +2,7 @@ from django.contrib import admin
 from django.urls import path ,include
 
 from django.contrib.auth.views import LogoutView
-from accounts.views import SignUpView,SuccessSignUpView, ActivateView, LoginView,UserPasswordResetView,UserPasswordResetDoneView,UserPasswordResetConfirmView,UserPasswordResetCompleteView,mypage
-# , UpdateMyPageView
-
+from accounts.views import *
 
 
 urlpatterns = [
@@ -13,8 +11,8 @@ urlpatterns = [
   path('activate/<str:uidb64>/<str:token>/',ActivateView.as_view(), name='activate'),
   path('login/', LoginView.as_view(), name='login'),
   path('logout/',LogoutView.as_view(),name="logout"),
-  # path('mypage/<int:pk>',mypage,name="mypage"),
-  # path('mypage/<int:pk>/update_mypage',UpdateMyPageView.as_view(),name="update_mypage"),
+  path('mypage/<int:pk>',mypage,name="mypage"),
+  path('mypage/update_nickname/<int:pk>',update_nickname,name="update_nickname"),
   path('password_reset/',UserPasswordResetView.as_view(),name="password_reset"),
   path('password_reset_done/', UserPasswordResetDoneView.as_view(), name="password_reset_done"),
   path('password_reset_confirm/<str:uidb64>/<str:token>/', UserPasswordResetConfirmView.as_view(), name="password_reset_confrim"),

@@ -14,7 +14,7 @@ from django.views.generic import TemplateView
 
 from .forms import SignUpForm, LoginForm, NicknameUpdateForm, PasswordUpdateForm,PasswordResetForm,NewPasswordSetForm
 from .models import CommunityUser
-from board.models import Post,Mini_Category
+from board.models import Post,Mini_Category,Category
 
 from django.contrib.auth.views import LoginView,PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView,PasswordResetCompleteView
 from django.contrib.auth.decorators import login_required
@@ -375,21 +375,51 @@ class UserPasswordResetCompleteView(PasswordResetCompleteView):
 
 
 
-
+@login_required
 def mypage(request,pk):
     context = dict()
     user = request.user
     context['user'] = user
-    
+    user_id = CommunityUser.objects.get(pk=pk)
+    context['user_id'] = user_id
     mini_categories = Mini_Category.objects.all()
     context['mini_categories'] = mini_categories
     return render(request,'mypage/mypage.html',context)
 
+@login_required
+def update_nickname(request,pk):
+    context = dict()
+    categories = Category.objects.all()   
+    context['categories'] = categories    
+    user = CommunityUser.objects.all()
+    my_user = CommunityUser.objects.get(pk=pk)
+    nickname_update_form = NicknameUpdateForm(instance=my_user)
+    context['nickname_update_form'] = nickname_update_form
 
-# def update_nickname(request,pk):
-#     context = dict()
-#     update_form = NicknameUpdateForm
-#     if update_form
+   
+    if request.method == "POST":
+        update_form = NicknameUpdateForm(request.POST,instance=my_user)
+        
+        
+        if update_form.is_valid():
+            save_form = update_form.save(commit=False)
+            for i in user:
+                
+                if save_form.nickname == i.nickname:
+                    messages.error(request,'닉네임이 중복됩니다! 다른 닉네임을 사용해주세요!')
+                    return redirect('update_nickname',pk)
+
+            if len(save_form.nickname)<2 or len(save_form.nickname)>8:
+                messages.error(request,'닉네임은 2자 이상 8자 이하입니다.')
+                return redirect('update_nickname',pk)
+
+
+            update_form.save()
+            #여기서는 url 요청이 아니라서 렌더 
+            return render(request,'mypage/update_nickname_complete.html',context)
+        
+      
+    return render(request,'mypage/update_nickname.html',context) 
 
 
 

@@ -41,9 +41,10 @@ class SignUpForm(UserCreationForm):
             raise forms.ValidationError('8자 이상의 안전한 비밀번호로 설정해주세요.')
         if password1 != password2:
             raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
-        #닉네임 중복 확인
+       
         if len(nickname)==1 or len(nickname)>=8:
             raise forms.ValidationError('닉네임은 2자 이상, 8자 이하입니다.')
+        #닉네임 중복 확인
         try:
             CommunityUser.objects.get(nickname=nickname)
             raise forms.ValidationError("이미 존재하는 닉네임입니다.")
@@ -83,6 +84,18 @@ class NicknameUpdateForm(forms.ModelForm):
     class Meta:
         model = CommunityUser
         fields = ['nickname',]
+    
+    # def clean(self,*args,**kwargs):
+    #     nickname = self.cleaned_data.get('nickname')
+    #     if len(nickname)==1 or len(nickname)>=8:
+    #         raise forms.ValidationError('닉네임은 2자 이상, 8자 이하입니다.')
+    #     #닉네임 중복 확인
+    #     try:
+    #         CommunityUser.objects.get(nickname=nickname)
+    #         raise forms.ValidationError("이미 존재하는 닉네임입니다.")
+    #     except CommunityUser.DoesNotExist:
+    #         pass
+    #     return self.cleaned_data
         
 
 
