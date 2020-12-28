@@ -40,6 +40,8 @@ def index(request):
     post_13 = Post.objects.filter(category=mini_13).order_by('-id')[:5]
     context['post_13']=post_13
 
+    context['popular_posts'] = Post.objects.order_by('-hit_count_generic__hits')[:10]
+
 
 
 

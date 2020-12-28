@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+from hitcount.models import HitCountMixin, HitCount
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
@@ -13,16 +15,25 @@ class Mini_Category(models.Model):
     def __str__(self):
         return self.title
         
-class Post(models.Model):
+class Post(models.Model, HitCountMixin):
     writer = models.CharField(max_length=8)
     title = models.CharField(max_length=50)
     content = models.TextField()
     updated_at = models.DateTimeField(auto_now_add= True) # 최초 생성 날짜만 갱신
     myimage = models.ImageField(null = True, blank = True)
     category = models.ForeignKey(Mini_Category,on_delete=models.CASCADE) 
-
+    like_count = models.PositiveIntegerField(default=0)
+    # GenericRelatio로 조회수별로 정렬할수 있음
+    hit_count_generic = GenericRelation(
+        HitCount, object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation'
+    )
+    
     def __str__(self):
         return self.title
+
+    def current_hit_count(self):
+        return self.hit_count.hits
 
 class Comment(models.Model):
     writer = models.CharField(max_length=8)
@@ -40,3 +51,4 @@ class ReComment(models.Model):
     comment = models.ForeignKey(Comment,on_delete=models.CASCADE,related_name="recomment")
     body = models.CharField('',max_length=150) #대댓글은 이름일단 없앰.
     created_at = models.DateTimeField(auto_now_add=True)
+

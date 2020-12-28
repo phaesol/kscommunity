@@ -20,8 +20,8 @@
         <img src="{{my_post.myimage.url}}" title="첨부 이미지" alt="게시판 글 이미지">
     </div>
     {% endif %}
-
-
+<!-- 조회수 -->
+{{ my_post.current_hit_count }} 회의 조회수
 <div class="time">{{my_post.updated_at}}</div>
 <div class="user">{{my_post.writer}}</div>
 <!-- 해당 포스트 작성유저가 현재 요청된 유저의 닉네임과 같을때 -->
@@ -29,6 +29,14 @@
 <a href="{% url 'update_post' my_post.id %}">수정하기</a>
 {% endif %}
 
+<div class="like">좋아요 수 :{{my_post.like_count}}</div>
+<a href="{% url 'like_toggle' my_post.id  %}">
+{% if my_post in user.like_post.all %}
+취소
+{% else %}
+좋아요
+{% endif %}
+</a>
 
 <form method="POST" action="{% url 'create_comment' my_post.id %}" class="comment-form">
     {% csrf_token %}
@@ -40,9 +48,12 @@
     {% for comment in my_post.comment_set.all %}
     <div class="comment">{{comment.body}}</div>
     <div class="comment-time">{{comment.created_at}}</div>
+    <div class="user">{{comment.writer}}</div>
+    {%if user.nickname == comment.writer %}
     <div class="delete-comment">
         <a href="{% url 'delete_comment' my_post.id comment.id %}">삭제</a>
     </div>
+    {% endif %}
     <!-- 나중에 클릭하면 대댓글 폼 나타나게 구현하기 -->
     <div class="recomment-btn">대댓글</div>
         <form method="POST" action="{% url 'create_recomment' my_post.id comment.id %}" class="recomment-form">
@@ -53,9 +64,14 @@
         {% for recomment in comment.recomment.all %}
             <div class="recomment">대댓글:{{recomment.body}}</div>
             <div class="recomment-time">{{recomment.created_at}}</div>
+           
+            <!-- 요청된 유저가 해당 글쓴이와 같으면 -->
+            {%if user.nickname == recomment.writer %}
             <div class="delete-recomment">
                 <a href="{% url 'delete_recomment' my_post.id recomment.id %}">삭제</a>
             </div>
+
+            {% endif %}
         {% endfor %}
     {% endfor %}
 </div>

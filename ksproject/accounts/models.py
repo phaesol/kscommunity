@@ -74,7 +74,7 @@ class CommunityUser(AbstractBaseUser,PermissionsMixin):
         verbose_name="닉네임"
     )   
     
-    likes = models.ManyToManyField(to=Post, related_name='likers')
+    like_post = models.ManyToManyField(to=Post, related_name='likers')
       
     is_active = models.BooleanField(default=True)    
     is_admin = models.BooleanField(default=False)    

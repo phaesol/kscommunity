@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'import_export',
     'accounts',
     'six',
+    'hitcount',
 ]
 
 MIDDLEWARE = [
