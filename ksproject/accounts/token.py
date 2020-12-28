@@ -1,3 +1,4 @@
+import six
 from six import text_type  # pip install six -- django 3.x.x 버전부터 지원 안해줘서 설치 필요
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 

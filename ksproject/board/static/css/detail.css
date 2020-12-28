@@ -1,1 +1,110 @@
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+    min-width: 320px;
+    min-height: 571px;
+    font-family: 'IBMPlexSansKR-Regular';
 
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.back {
+    width: 100%;
+    margin-left: 5%;
+    margin-top: 10px;
+
+    font-size: 1.5rem;
+}
+
+.back a:link {
+    color: black;
+}
+
+.back a:visited {
+    color: black;
+}
+
+.back a:hover {
+
+    color: black;
+}
+
+.back a:active {
+
+    color: black;
+}
+
+.category {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.detail-wrapper {
+    margin: 15px auto;
+    display: flex;
+    width: 80%;
+    font-size: 1.5rem;
+    border: rgb(129, 129, 129) 1px solid;
+
+}
+
+.sub-wrapper {
+    display: flex;
+    margin-left: auto;
+    flex-direction: column;
+    width: 30%;
+}
+
+.count-wrapper {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: 5%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+
+
+.user {
+    font-size: 2rem;
+    margin: 10px 30px;
+    
+}
+
+.time {
+    color: rgb(90, 89, 89);
+    margin-left: auto;
+    flex: 1;
+    margin-right: 5%;
+   
+
+}
+
+
+.content-wrapper {
+    flex: 3;
+}
+
+.title
+ {
+    text-align: center;
+    font-size: 3rem;
+    width: 100%;
+}
+
+.content{
+    text-align: center;
+    font-size: 2rem;
+    width: 100%;
+    
+}

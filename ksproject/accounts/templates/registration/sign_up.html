@@ -1,15 +1,29 @@
-<form method="POST" action="{% url 'signup' %}">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">다음으로(회원가입)</button>
-</form>
-<!-- 닉네임 중복 확인 기능 및 비밀번호 유효성 메세지 처리 한번 더 보기 -->
-{% if messages %}
 
-    {% for message in messages %}
-        {% if meesage.tags %}
-        {{message.tags}}
-        {% endif %}
-        {{ message }}
-    {% endfor %}
-{% endif %}
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+{% block content %}
+<div class="signup">
+	<form action="{% url 'signup' %}" method="post">
+		{% csrf_token %}
+		{% for field in signup_form %}
+			<div class="form-group{% if field.errors %} has-error{% endif %}">
+				{{ field.label_tag }}
+				{{ field }}
+				{% if field.errors %}
+					{% for error in field.errors %}
+					<span class="help-block">{{ error }}</span>
+					{% endfor %}
+				{% endif %}
+			</div>
+		{% endfor %}
+
+		{% if signup_form.non_field_errors %}
+			{% for error in login_form.non_field_errors %}
+			<p class="text-danger"><b>{{ error }}</b></p>
+			{% endfor %}
+		{% endif %}
+		<button class="btn btn-primary btn-block">회원가입</button>
+	</form>
+</div>
+{% endblock %}

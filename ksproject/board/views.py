@@ -237,31 +237,4 @@ class PostDetail(HitCountDetailView):
         
         return context
 	
-    # model = Post   
-    # template_name = 'detail.html'
-	# count_hit = True    
-   
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostDetail, self).get_context_data(**kwargs)
-    #     context['my_post'] = Post.objects.get(id=post_id)
-    #     context['categories'] = Category.objects.all()
-    #     context['comment_form'] = CommentForm()
-    #     context['recomment_form'] = ReCommentForm()
-    #     return context
-
-# @login_required
-# def detail(request,post_id):
-#     context = dict()
-   
-   
-#     user = request.user
-#     categories = Category.objects.all()
-#     context['categories'] = categories
-
-#     context['comment_form'] = CommentForm()
-#     context['recomment_form'] = ReCommentForm()
-             
-
-#     my_post =get_object_or_404(Post,id=post_id)
-#     context['my_post'] = my_post
+  

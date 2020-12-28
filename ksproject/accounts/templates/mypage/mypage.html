@@ -10,6 +10,6 @@
 
 <div class="update_mypage">
     <a href="{% url 'update_nickname' user.pk %}">닉네임 수정하기</a>
-    <div>비밀번호 수정하기</div>
+    <div><a href="{% url 'password_reset' %}">비밀번호 수정하기</a></div>
 </div>
 </form>

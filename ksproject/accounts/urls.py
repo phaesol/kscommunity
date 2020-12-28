@@ -6,9 +6,9 @@ from accounts.views import *
 
 
 urlpatterns = [
-  path('signup/', SignUpView.as_view(), name='signup'),
+  path('signup/', sign_up, name='signup'),
   path('success_signup/', SuccessSignUpView.as_view(), name='success_signup'),
-  path('activate/<str:uidb64>/<str:token>/',ActivateView.as_view(), name='activate'),
+  path('activate/<str:uidb64>/<str:token>/',activate, name='activate'),
   path('login/', LoginView.as_view(), name='login'),
   path('logout/',LogoutView.as_view(),name="logout"),
   path('mypage/<int:pk>',mypage,name="mypage"),
