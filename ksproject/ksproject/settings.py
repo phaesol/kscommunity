@@ -49,6 +49,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,7 +60,7 @@ INSTALLED_APPS = [
     'board',
     'django_summernote',
     'import_export',
-    'accounts',
+    
     'six',
     'hitcount',
 ]

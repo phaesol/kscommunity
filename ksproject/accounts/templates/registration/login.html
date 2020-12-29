@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>로그인 하기</h1>
 <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
     {{form.as_p}}
@@ -13,6 +16,7 @@
         {{ message }}
     {% endfor %}
 {% endif %}
-
+{% endblock %}
 
 <p><a href="{% url 'signup' %}">아직 회원이 아니시라면?</a></p>
+<a href="{% url 'password_reset' %}">비밀번호를 까먹으셨나요?</a>

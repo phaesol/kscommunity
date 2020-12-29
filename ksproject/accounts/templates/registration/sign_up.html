@@ -1,15 +1,17 @@
 
 {% extends 'base.html' %}
 
-{% block title %}Signup{% endblock %}
+
 {% block content %}
 <div class="signup">
 	<form action="{% url 'signup' %}" method="post">
 		{% csrf_token %}
+	
 		{% for field in signup_form %}
 			<div class="form-group{% if field.errors %} has-error{% endif %}">
 				{{ field.label_tag }}
 				{{ field }}
+				
 				{% if field.errors %}
 					{% for error in field.errors %}
 					<span class="help-block">{{ error }}</span>
@@ -19,7 +21,7 @@
 		{% endfor %}
 
 		{% if signup_form.non_field_errors %}
-			{% for error in login_form.non_field_errors %}
+			{% for error in signup_form.non_field_errors %}
 			<p class="text-danger"><b>{{ error }}</b></p>
 			{% endfor %}
 		{% endif %}
