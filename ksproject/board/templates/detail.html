@@ -31,7 +31,10 @@
             {% if my_post.writer == user.nickname %}
                 <div class="delete-post"><a href="{% url 'delete_post' pk=my_post.id  %}">글 삭제</a></div>
             {% endif %}
-            <div class="hit-count">조회수 : {{my_post.current_hit_count }} </div> 
+            <div class="hit-count">
+            {% load hitcount_tags %}
+            조회수 {% get_hit_count for my_post within "days=1" %}
+            </div> 
             <div class="like">
                 
                 <a href="{% url 'like_toggle' my_post.id  %}">
@@ -43,7 +46,8 @@
                 </a> 
                 {{my_post.like_count}} 
             </div> 
-        </div> 
+        </div>
+         
         <div class="time">{{my_post.updated_at}}</div>
          <!-- 해당 포스트 작성유저가 현재 요청된 유저의 닉네임과 같을때 -->
          
@@ -70,7 +74,8 @@
     <div class="writer">{{comment.writer}}</div>
     {%if user.nickname == comment.writer %}
     <div class="delete-comment">
-        <a href="{% url 'delete_comment' comment.id %}">삭제</a>
+        <!-- 댓글 삭제 전 확인 알람 -->
+        <a onclick="return confirm('댓글을 정말로 삭제하시겠습니까?');" href="{% url 'delete_comment' comment.id %}">삭제</a>
     </div>
     {% endif %}
     <!-- 나중에 클릭하면 대댓글 폼 나타나게 구현하기 -->
@@ -87,7 +92,7 @@
             <!-- 요청된 유저가 해당 글쓴이와 같으면 -->
             {%if user.nickname == recomment.writer %}
             <div class="delete-recomment">
-                <a href="{% url 'delete_recomment' recomment.id %}">삭제</a>
+                <a onclick="return confirm('댓글을 정말로 삭제하시겠습니까?');" href="{% url 'delete_recomment' recomment.id %}">삭제</a>
             </div>
 
             {% endif %}
@@ -101,15 +106,11 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
 </script>
 <script>
-    $('.delete-comment').click(function(){
-        
-        alert('댓글을 정말 삭제하시겠습니까?');
-    });
-
-    // $('.delete-post').click(function(){
-        
-    //     alert('게시물을 삭제하시겠습니까?');
+    // $('.delete-comment').click(function(){
+    //     confirm('지울꺼니?');
     // });
+
+   
 </script>
 
 

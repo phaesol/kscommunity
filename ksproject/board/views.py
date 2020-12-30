@@ -181,12 +181,14 @@ def create_comment(request,post_id):
 @login_required
 def delete_comment(request,com_id):
     context = dict() 
+   
+        
     my_com = Comment.objects.get(id=com_id)
     context['my_com'] = my_com
     user = request.user
     context['user'] = user
     my_com.delete()
-   
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -208,7 +210,7 @@ def create_recomment(request,post_id,com_id):
 def delete_recomment(request,recom_id):
     context = dict()
     my_recom = ReComment.objects.get(id=recom_id)
-   
+    
     context['my_recom'] = my_recom
     user = request.user
     context['user'] = user
@@ -252,7 +254,8 @@ class PostDetail(HitCountDetailView):
         context['comment_form'] = CommentForm()
         context['recomment_form'] = ReCommentForm()
         context.update({
-            'popular_posts': Post.objects.order_by('-hit_count_generic__hits')[:3],
+            'popular_posts': Post.objects.order_by('-hit_count.hits_in_last(days=7)')[:5],
+            # 'popular_posts': Post.objects.order_by('-hit_count_generic__hits')[:3],
         })
         
         return context

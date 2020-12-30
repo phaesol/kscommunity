@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<a href="{% url 'logout' %}">로그아웃</a>
+
 <form method="POST" action="{%url 'mypage' user.pk%}">
 <!-- 비교필요 -->
 {% if user.is_authenticated %}

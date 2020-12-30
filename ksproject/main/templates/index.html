@@ -2,95 +2,134 @@
 {% block title %} <title>커뮤니티 이름 뭐하딩</title> {% endblock title %}
 
 {% block content %}
-<div class="category-wrapper">
-<div class="category-post">
-    <div class="category-title">{{mini_1}}</div>
-    <div class="post_list">
-    
-        {% for i in post_1 %}
-        <a href="{% url 'detail' i.id %}">{{i}}</a>
-        {% endfor %}
-    
-    </div>
-</div>
-
-<div class="category-post">
-    <div class="category-title">{{mini_2}}</div>
-    <div class="post_list">
-    
-        {% for i in post_2 %}
-        <a href="{% url 'detail' i.id %}">{{i}}</a>
-        {% endfor %}
-    
-    </div>
-</div>
-
-
-<div class="category-post">
-    <div class="category-title">{{mini_5}}</div>
-    <div class="post_list">
-    
-        {% for i in post_5 %}
-        <a href="{% url 'detail' i.id %}">{{i}}</a>
-        {% endfor %}
-    
-    </div>
-</div>
-
-
-<div class="category-post">
-    <div class="category-title">{{mini_8}}</div>
-    <div class="post_list">
-    
-        {% for i in post_8 %}
-        <a href="{% url 'detail' i.id %}">{{i}}</a>
-        {% endfor %}
-    
-    </div>
-</div>
-
-<div class="category-post">
-    <div class="category-title">{{mini_9}}</div>
-    <div class="post_list">
-    
-        {% for i in post_9 %}
-        <a href="{% url 'detail' i.id %}">{{i}}</a>
-        {% endfor %}
-    
-    </div>
-</div>
-
-
-<div class="category-post">
-    <div class="category-title">{{mini_13}}</div>
-    <div class="post_list">
-    
-        {% for i in post_13 %}
-        <a href="{% url 'detail' i.id %}">{{i}}</a>
-        {% endfor %}
-    
-    </div>
-</div>
-</div>
+<div class="container">
 {% if user.is_authenticated %}
 <div class="user-profile">
-    {{user}}
-    {{user.nickname}}
-</div>
-<div class="mypage"><a href="{% url 'mypage' user.pk%}">마이페이지</a></div>
+    <div class="user-img"><img src="../static/profile.png" title="프로필" alt="프로필 이미지" ></div>
+    <div class="user-nickname">{{user.nickname}}</div>
+    <div class="user-info">
+        <div class="user">{{user}}</div>
+        <div class="mypage-btn">
+            <a href="{% url 'mypage' user.pk%}"  class="mypage" >마이페이지</a>
+            <a onclick="return confirm('로그아웃 하시겠습니까?');" href="{% url 'logout' %}" class="logout">로그아웃</a>
+        </div>
+    </div>
 {% else %}
-<div class="signup"><a href="{% url 'signup' %}">회원가입하기</a></div>
-<div class="login"><a href="{% url 'login' %}">로그인하기</a></div>
+<div class="user-profile">
+    <div class="user-img"><img src="../static/profile.png" title="프로필" alt="프로필 이미지" ></div>
+    <div class="signup"><a href="{% url 'signup' %}">회원가입하기</a></div>
+    <div class="login"><a href="{% url 'login' %}">로그인하기</a></div>
+</div>
 {% endif %}
+</div>
+
+<div class="category-wrapper">
+    <div class="category-post">
+        <div class="category-title">📌 {{mini_1}}</div>
+        {% if post_1 %}
+    
+        {% for i in post_1 %}
+            <div class="post_list">
+            <a href="{% url 'detail' i.id %}">{{i}}</a>
+            </div>
+        {% endfor %}
+    
+        {% endif %}
+    </div>
+
+<div class="category-post">
+    <div class="category-title">📌 {{mini_2}}</div>
+    {% if post_2 %}
+  
+    
+        {% for i in post_2 %}
+        <div class="post_list">
+        <a href="{% url 'detail' i.id %}">{{i}}</a>
+        </div>
+        {% endfor %}
+        
+       
+    {% endif %} 
+    </div>
+    
+
+    <div class="category-post">
+        <div class="category-title">📌 {{mini_5}}</div>
+        {% if post_2 %}
+       
+           
+            {% for i in post_5 %}
+            <div class="post_list">
+            <a href="{% url 'detail' i.id %}">{{i}}</a>
+            </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+       
+    
+
+
+    <div class="category-post">
+        <div class="category-title">📌 {{mini_8}}</div>
+        {% if post_8 %}
+       
+        
+            {% for i in post_8 %}
+            <div class="post_list">
+            <a href="{% url 'detail' i.id %}">{{i}}</a>
+            </div>
+            {% endfor %}
+        
+       
+        {% endif %}
+    </div>
+
+    <div class="category-post">
+        <div class="category-title">📌 {{mini_9}}</div>
+       
+        {% if post_9 %}
+            {% for i in post_9 %}
+            <div class="post_list">
+            <a href="{% url 'detail' i.id %}">{{i}}</a>
+            </div>
+            {% endfor %}
+        {% endif %}
+       
+    </div>
+
+
+    <div class="category-post">
+        <div class="category-title">📌 {{mini_13}}</div>
+        {% if post_13 %}
+       
+        
+            {% for i in post_13 %}
+            <div class="post_list">
+            <a href="{% url 'detail' i.id %}">{{i}}</a>
+            </div>
+            {% endfor %}
+        
+        
+        {% endif %}
+    </div>
+</div>
 
 
 
 <div class="popular-post">
+    <div class="popular-title">인기 게시물</div>
+    
     {% for post in popular_posts%}
-    {{post}}
-    {%endfor%}</div>
+    <div class="popular-content">
+        
+    <div class="post-title"><a href="{% url 'detail' post.id %}">{{post}}</a></div>
+    <div class="post-category"> {{post.category}}</div>
+    </div>
+    {%endfor%}
+    
+   </div>
 
 
 
-
+</div>
 {% endblock content %}

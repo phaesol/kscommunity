@@ -16,6 +16,20 @@ html {
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     list-style: none;
     text-decoration: none;
@@ -23,7 +37,13 @@ html {
     font-family: 'IBMPlexSansKR-Regular';
 }
 
+/* *:active,*:hover,*:focus{
+    color: black;
+}
 
+* a{
+    color: black;
+} */
 
 nav {
     width: 100%;
@@ -38,7 +58,7 @@ nav {
     flex-direction: row;
     margin: 0;
     padding: 0;
-    background-color: #A2C0A4;
+    background-color:#F2AF5C;
     color: white;
 
 
@@ -78,7 +98,7 @@ nav {
 .nav-container {
     width: 90%;
     height: 70%;
-    border-bottom: 2px solid #A2C0A4;
+    border-bottom: 1.5px solid#F2AF5C;
     display: flex;
     font-size: 1.4rem;
     margin: 0;
@@ -103,7 +123,7 @@ nav {
 
 
 .nav-item a:hover {
-    color: #A2C0A4;
+    color: #F2AF5C;
 }
 
 /* 상속이 더 강하기 때문에 위에랑
@@ -111,7 +131,7 @@ nav {
 nav-item 적어줘서 상속해줌.  */
 .nav-item a.active {
     
-    color: #A2C0A4;
+    color:#F2AF5C;
     font-weight: bold;
 }
 
@@ -135,7 +155,7 @@ nav-item 적어줘서 상속해줌.  */
 }
 
 #search:focus{
-    border: 2px solid rgb(202, 202, 202);
+    border: 2px solid #F28D52;
     border-radius: 5px;
     
 }
@@ -150,7 +170,7 @@ input:focus::-webkit-input-placeholder {
 #search-btn{
   
     border-style: none;
-    background-color:  #A2C0A4;
+    background-color:  #F2AF5C;
     color: white;
     background: url(search.png);
     background-repeat: no-repeat;
@@ -163,15 +183,161 @@ input:focus::-webkit-input-placeholder {
 
 }
 
-.category-wrapper{
-    
 
+/* 인덱스 화면 부분 */
+.container{
+    width: 100%;
+    display: flex;
+}
+/* 유저 프로필 부분 */
+.user-profile{
+    flex: 1;
+    text-align: center;
+    
+    border: 1px solid #F2AF5C;
+    border-radius: 2px;
+    margin: 30px;
+    padding-top:20px;
+    height: 300px;
+}
+
+.user-img img{
+    width: 35%;
+    height: 35%;
+}
+
+.user-info{
+    margin-top: 30px;
+}
+
+.user-nickname{
+    margin-top: 10px;
+    font-family: 'BMEULJIRO';
+    font-size: x-large;
+}
+
+.user{
+    font-size: medium;
+    color: #555454;
+}
+
+.mypage-btn{
+    display: flex;
+    margin-top: 45px;
+    padding: 0 10px;
+}
+
+.mypage-btn a{
+    flex: 1;
+    border: 1px solid #F2AF5C;
+    border-radius: 5px;
+    height: 45px;
+    display: flex;
+    font-size: medium;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+
+.mypage+.logout{
+    margin-left: 10px;
+}
+
+.mypage-btn a{
+    color: black;
+}
+
+.mypage-btn a:hover{
+    background-color:#F2AF5C;
+    color: white;
+    
+}
+
+.mypage-btn a:active{
+    background-color:#F2AF5C;
+    color: white;
+    
+}
+
+
+
+/* 게시판 부분 */
+
+.category-wrapper{
+    flex: 3;
+    
+    width: 100%;
+   
 }
 
 .category-post{
-    border: 1px solid black;
+    border:1px solid #F2AF5C;
+    width: 250px;
+    display:block;
+    height: 250px;
+    float: left;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+.category-title{
+    border-bottom: 1px solid #F2AF5C;
+    font-size:1.5rem;
+    padding: 5% ;
+}
+
+.post_list{
+    width: 90%;
+    border-bottom: 1px solid #F2AF5C;
+    padding: 5%;
+    font-size: 1.2rem;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 
+
+/* 인기 게시물 부분 */
+.popular-post{
+    flex: 1;
+    flex-direction: column;
+    border: 1px solid #F2AF5C;
+    width: 250px;
+    height: 350px;
+    margin: 35px;
+    
+}
+
+.popular-title{
+    width: 90%;
+    background-color: #F2AF5C ;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 5%;
+}
+
+.popular-content{
+    width: 90%;
+    border-bottom: 1px solid #F2AF5C;
+    padding: 5%;
+    font-size: 1.3rem;
+   
+
+}
+
+.post-title{
+    width: 50%;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
+}
+
+.post-category{
+    font-size: 1.1rem;
+    color: rgb(102, 101, 101);
+}
 
 
