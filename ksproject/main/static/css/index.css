@@ -240,7 +240,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 
-.mypage+.logout{
+.mypage+.logout,.signup+.login{
     margin-left: 10px;
 }
 
@@ -260,7 +260,47 @@ input:focus::-webkit-input-placeholder {
     
 }
 
+.login-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 55px;
+    padding: 0px 10%;
+}
 
+.login-btn a{
+    flex: 1;
+    border: 1px solid #F2AF5C;
+    border-radius: 5px;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    font-size: medium;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.login-btn a{
+    color: black;
+}
+
+.login-btn a:hover{
+    background-color:#F2AF5C;
+    color: white;
+    
+}
+
+.login-btn a:active{
+    background-color:#F2AF5C;
+    color: white;
+    
+}
+
+.plz-login{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 15%;
+}
 
 /* 게시판 부분 */
 
@@ -340,4 +380,15 @@ input:focus::-webkit-input-placeholder {
     color: rgb(102, 101, 101);
 }
 
+/* 닉네임 수정폼  */
 
+.update-nickname-form{
+    width: 40%;
+    height: 600px;
+    margin:10% auto;
+    text-align: center;
+    font-size: 1.5rem;
+    border: 1.5px solid#F2AF5C;
+    border-radius: 5px;
+    
+}

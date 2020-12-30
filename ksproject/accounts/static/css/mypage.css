@@ -1,0 +1,43 @@
+/* 초기화 코드 */
+html {
+    font-family: 'IBMPlexSansKR-Regular';
+    padding: 0;
+    margin: 0 auto;
+    font-size: 10px;
+}
+
+.mypage-form{
+    width: 40%;
+    height: 600px;
+    margin:10% auto;
+    text-align: center;
+    font-size: 1.5rem;
+    border: 1.5px solid#F2AF5C;
+    border-radius: 5px;
+    
+}
+
+.mypage-form a{
+    color: black;
+}
+
+
+.myuser-img{
+    width: 50%;
+    height: 30%;
+    margin: 5% auto;
+    margin-bottom: 0;
+}
+
+.my-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage-form div+div{
+    margin-top: 5%;
+}
+
+.mypage-form a:active,.mypage-form a:hover,.mypage-form a:focus{
+    color: #F2AF5C;
+}

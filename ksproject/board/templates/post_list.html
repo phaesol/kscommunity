@@ -24,7 +24,9 @@
         <img src="{{post.myimage.url}}" title="첨부 이미지" alt="게시판 글 이미지">
     </div>
     {% endif %}
-   
+    <div class="like">💛 {{post.like_count}}</div>
+    
+    <div class="comment">💬 {{post.comment_set.all.count}}</div>
     </a>
 </div>
 

@@ -1,6 +1,12 @@
-<form method="POST" action="{% url 'update_nickname' user.pk %}">
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" action="{% url 'update_nickname' user.pk %}" class="update-nickname-form">
     {% csrf_token %}
-    {{nickname_update_form}}
+    <div class="title">닉네임 변경하기</div>
+    {% for form in nickname_update_form %}
+    <div class="form-title">{{form.label}}</div>
+    <div class="form-content">{{form}}</div>
+    {% endfor %}
     
     <button type="submit">정보 수정 완료</button>
 </form>
@@ -14,3 +20,5 @@
         {{ message }}
     {% endfor %}
 {% endif %}
+
+{% endblock content %}

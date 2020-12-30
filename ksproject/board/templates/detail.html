@@ -38,13 +38,15 @@
             <div class="like">
                 
                 <a href="{% url 'like_toggle' my_post.id  %}">
-                {% if my_post in user.like_post.all %}
-                취소
-                {% else %}
-                좋아요
-                {% endif %}
+                   
+                    {% if my_post in user.like_post.all %}
+                    💔
+                    {% else %}
+                    ❤️ 
+                    {% endif %}
+                    {{my_post.like_count}} 
                 </a> 
-                {{my_post.like_count}} 
+               
             </div> 
         </div>
          

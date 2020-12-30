@@ -14,14 +14,18 @@
             <a onclick="return confirm('로그아웃 하시겠습니까?');" href="{% url 'logout' %}" class="logout">로그아웃</a>
         </div>
     </div>
+</div>
 {% else %}
 <div class="user-profile">
     <div class="user-img"><img src="../static/profile.png" title="프로필" alt="프로필 이미지" ></div>
-    <div class="signup"><a href="{% url 'signup' %}">회원가입하기</a></div>
-    <div class="login"><a href="{% url 'login' %}">로그인하기</a></div>
+    <div class="plz-login">로그인 해주세요.</div>
+    <div class="login-btn">
+        <a href="{% url 'signup' %}" class="signup">회원가입</a>
+        <a href="{% url 'login' %}" class="login">로그인</a>
+    </div>
 </div>
 {% endif %}
-</div>
+
 
 <div class="category-wrapper">
     <div class="category-post">

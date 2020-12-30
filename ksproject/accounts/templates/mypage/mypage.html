@@ -1,19 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/mypage.css' %}">
+{% block title %}<title>마이페이지</title>{% endblock title %}
+{% endblock head %}
 {% block content %}
 
-<form method="POST" action="{%url 'mypage' user.pk%}">
-<!-- 비교필요 -->
+<form method="POST" action="{%url 'mypage' user.pk%}" class="mypage-form">
+
 {% if user.is_authenticated %}
+<div class="myuser-img"><img src="{% static 'myprofile.png'%}" title="프로필" alt="프로필 이미지" ></div>
+<div class="user-nickname">{{user.nickname}}</div>
+<div class="user-info">
+    <div class="user">{{user}}</div>
+    </div>
+<div class="my-wrapper">
+<div class="mypost"><a href="{% url 'my_post' %}">내가 쓴 글</a></div>
 
-<a href="{% url 'my_post' %}">내가 쓴 글</a>
+<div class="mylike"><a href="{% url 'my_like' %}">좋아요한글</a></div>
+  
 
-<a href="{% url 'my_like' %}">좋아요한글</a>
-
-{% endif %}
 
 <div class="update_mypage">
-    <a href="{% url 'update_nickname' user.pk %}">닉네임 수정하기</a>
-    <div><a href="{% url 'password_reset' %}">비밀번호 수정하기</a></div>
+    <div class="update-nickname"><a href="{% url 'update_nickname' user.pk %}">닉네임 수정하기</a></div>
+    <div class="password-reset"><a href="{% url 'password_reset' %}">비밀번호 수정하기</a></div>
 </div>
+</div>  
 </form>
+
+{% endif %}
 {% endblock content %}
