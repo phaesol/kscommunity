@@ -65,7 +65,7 @@ class SignUpForm(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     error_messages = {
-        'invalid_login': '로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.',
+        'invalid_login': '',
         'inactive': "로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해 주세요.",
     }
     

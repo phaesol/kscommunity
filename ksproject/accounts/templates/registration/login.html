@@ -16,7 +16,8 @@
         {{ message }}
     {% endfor %}
 {% endif %}
-{% endblock %}
+
 
 <p><a href="{% url 'signup' %}">아직 회원이 아니시라면?</a></p>
 <a href="{% url 'password_reset' %}">비밀번호를 까먹으셨나요?</a>
+{% endblock %}

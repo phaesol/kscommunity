@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404,get_list_or_404
 from board.forms import PostForm,CommentForm,ReCommentForm
 from board.models import Post,Category,Mini_Category,Comment,ReComment
+from accounts.models import CommunityUser
+
 
 def index(request):
     context = dict()
@@ -42,13 +44,8 @@ def index(request):
 
     context['popular_posts'] = Post.objects.order_by('-hit_count_generic__hits')[:10]
 
-
-
-
-
-  
-
-
+    
+    
     return render(request,'index.html',context)
 
 

@@ -1,0 +1,50 @@
+{% extends 'post_list.html' %}
+
+{% block content %}
+
+{% if likes %}
+<h1>내가 좋아요 한 글</h1>
+{% for post in page_obj %}
+<div class="post_wrapper">
+    <a href="{% url 'detail' post.id %}">
+    <div class="title">{{post.title}}</div>
+    <div class="content">{{post.content|safe}}</div>
+    {% if post.myimage %}
+    <div class="image">
+        <img src="{{post.myimage.url}}" title="첨부 이미지" alt="게시판 글 이미지">
+    </div>
+    {% endif %}
+   <div class="category">{{post.category}}</div>
+    </a>
+</div>
+{% endfor %}
+{% else %}
+좋아요한 게시물이 없습니다.
+{% endif %}
+
+
+
+
+
+<div class="paging">
+    <div class="step-links">
+        <div class="previous">
+        {% if page_obj.has_previous %}
+            
+            <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+        {% endif %}
+        </div>
+
+        <div class="current">
+            {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} 페이지
+        </div>
+        <div class="next">
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">다음</a>
+            
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

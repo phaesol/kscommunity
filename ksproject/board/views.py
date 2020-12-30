@@ -6,6 +6,8 @@ from accounts.models import CommunityUser
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from hitcount.views import HitCountDetailView
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy,reverse
 @login_required
 def create(request,mini_category_id): 
     context = dict()
@@ -109,6 +111,24 @@ def update_post(request,post_id):
    
     return render(request,'create.html',context)  
 
+# @login_required
+# def delete_post(request,post_id):
+#     context = dict() 
+#     my_post = Post.objects.get(id=post_id)
+#     context['my_post'] = my_post
+#     user = request.user
+#     context['user'] = user
+#     my_post.delete()
+   
+#     return render(request,'detail.html',context)
+class deleteView(DeleteView):
+    model = Post
+    template_name= 'delete_confirm.html'
+
+    def get_success_url(self):
+        return reverse('post_list', kwargs={'mini_category_id': self.object.category_id})
+    
+
     
 
 def search(request):
@@ -159,7 +179,7 @@ def create_comment(request,post_id):
     
 
 @login_required
-def delete_comment(request,post_id,com_id):
+def delete_comment(request,com_id):
     context = dict() 
     my_com = Comment.objects.get(id=com_id)
     context['my_com'] = my_com
@@ -167,7 +187,7 @@ def delete_comment(request,post_id,com_id):
     context['user'] = user
     my_com.delete()
    
-    return render(request,'detail.html',context)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -185,16 +205,16 @@ def create_recomment(request,post_id,com_id):
     return redirect('detail',post_id)
 
 
-def delete_recomment(request,post_id,com_id):
+def delete_recomment(request,recom_id):
     context = dict()
-    my_recom = ReComment.objects.get(id=com_id)
+    my_recom = ReComment.objects.get(id=recom_id)
    
     context['my_recom'] = my_recom
     user = request.user
     context['user'] = user
    
     my_recom.delete()
-    return render(request,'detail.html',context)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required

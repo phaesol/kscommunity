@@ -34,6 +34,7 @@ class Post(models.Model, HitCountMixin):
 
     def current_hit_count(self):
         return self.hit_count.hits
+    
 
 class Comment(models.Model):
     writer = models.CharField(max_length=8)

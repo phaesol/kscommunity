@@ -54,7 +54,7 @@ from .token import account_activation_token #인증 토큰
 from .emailtext import message
 
 from django.template.loader import render_to_string
-
+from django.core.paginator import Paginator
 #비밀번호 변경 관련 토큰 생성
 UserModel = get_user_model()
 INTERNAL_RESET_URL_TOKEN = 'set-password'
@@ -215,12 +215,19 @@ class MyPasswordResetConfirmView(PasswordResetConfirmView):
 @login_required
 def mypage(request,pk):
     context = dict()
+
     user = request.user
     context['user'] = user
+
     user_id = CommunityUser.objects.get(pk=pk)
     context['user_id'] = user_id
+
     mini_categories = Mini_Category.objects.all()
     context['mini_categories'] = mini_categories
+    
+    categories = Category.objects.all()
+    context['categories'] = categories
+    
     return render(request,'mypage/mypage.html',context)
 
 @login_required
@@ -259,5 +266,35 @@ def update_nickname(request,pk):
     return render(request,'mypage/update_nickname.html',context) 
 
 
+@login_required
+def my_post(request):
+    context = dict()
+    my_user = request.user
+    user = my_user.nickname
+    my_post = Post.objects.filter(writer=user)
+    context['my_post'] = my_post
+    
+    paginator = Paginator(my_post, 10)
+    page_number = request.GET.get('page') 
+    page_obj = paginator.get_page(page_number) 
+    context['page_obj'] = page_obj
+
+    context['categories'] = Category.objects.all()
+    return render(request,'mypage/my_post.html',context)
+
+@login_required
+def my_like(request):
+    context = dict()
+    user = request.user
+    likes = user.like_post.all()
+    
+    paginator = Paginator(likes, 10)
+    page_number = request.GET.get('page') 
+    page_obj = paginator.get_page(page_number) 
+    context['page_obj'] = page_obj
+    context['likes'] = likes
+
+    context['categories'] = Category.objects.all()
+    return render(request,'mypage/my_like.html',context)
 
 

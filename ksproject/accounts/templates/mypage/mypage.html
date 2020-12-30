@@ -1,11 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
 <a href="{% url 'logout' %}">로그아웃</a>
 <form method="POST" action="{%url 'mypage' user.pk%}">
 <!-- 비교필요 -->
 {% if user.is_authenticated %}
 
-내가 쓴 글
-좋아요한글
-댓글단 글
+<a href="{% url 'my_post' %}">내가 쓴 글</a>
+
+<a href="{% url 'my_like' %}">좋아요한글</a>
+
 {% endif %}
 
 <div class="update_mypage">
@@ -13,3 +16,4 @@
     <div><a href="{% url 'password_reset' %}">비밀번호 수정하기</a></div>
 </div>
 </form>
+{% endblock content %}

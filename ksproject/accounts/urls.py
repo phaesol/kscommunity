@@ -15,5 +15,6 @@ urlpatterns = [
   path('mypage/update_nickname/<int:pk>',update_nickname,name="update_nickname"),
   path('password_reset/', MyPasswordResetView.as_view(), name='password_reset'),
   path('password_reset_confirm/<uidb64>/<token>/', MyPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-  
+  path('my_post/',my_post,name="my_post"),
+  path('my_like/',my_like,name="my_like"),
   ]
