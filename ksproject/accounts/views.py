@@ -102,9 +102,10 @@ def sign_up(request):
             email.send()
 
             return HttpResponse(
-                  '<div style="font-size: 40px; width: 100%; height:100%; display:flex; text-align:center; '
+                  '<div style="font-size: 35px; width: 100%; height:100%; display:flex; flex-direction:column; text-align:center; '
                     'justify-content: center; align-items: center;">'
-                    '입력하신 이메일<span>로 인증 링크가 전송되었습니다.</span>'
+                    '<span>입력하신 이메일로 인증 링크가 전송되었습니다.</span>'
+                    '<span>3분 내로 메일이 오지 않는다면 회원가입 절차를 다시 진행해주세요.</span>'
                     '</div>'
             )
 
@@ -203,8 +204,6 @@ class MyPasswordResetConfirmView(PasswordResetConfirmView):
 
 
 
-#
-
 
 
 
@@ -242,11 +241,11 @@ def update_nickname(request,pk):
 
    
     if request.method == "POST":
-        update_form = NicknameUpdateForm(request.POST,instance=my_user)
+        nickname_update_form = NicknameUpdateForm(request.POST,instance=my_user)
         
         
-        if update_form.is_valid():
-            save_form = update_form.save(commit=False)
+        if nickname_update_form.is_valid():
+            save_form = nickname_update_form.save(commit=False)
             for i in user:
                 
                 if save_form.nickname == i.nickname:
@@ -258,7 +257,7 @@ def update_nickname(request,pk):
                 return redirect('update_nickname',pk)
 
 
-            update_form.save()
+            nickname_update_form.save()
             #여기서는 url 요청이 아니라서 렌더 
             return render(request,'mypage/update_nickname_complete.html',context)
         

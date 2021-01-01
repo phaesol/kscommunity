@@ -1,24 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST" action="{% url 'update_nickname' user.pk %}" class="update-nickname-form">
+<h1>닉네임 변경하기</h1>
+<form method="POST" action="{% url 'update_nickname' user.pk %}" class="update-form">
     {% csrf_token %}
-    <div class="title">닉네임 변경하기</div>
+    
     {% for form in nickname_update_form %}
-    <div class="form-title">{{form.label}}</div>
+    
+    <div class="form-title">{{form.label}} 변경</div>
     <div class="form-content">{{form}}</div>
     {% endfor %}
     
-    <button type="submit">정보 수정 완료</button>
+    <div class="message">
+        {% if messages %}
+        
+        {% for message in messages %}
+            {% if meesage.tags %}
+            {{message.tags}}
+            {% endif %}
+            {{ message }}
+        {% endfor %}
+        {% endif %}
+    </div>
+    
+    <button type="submit" id="submit-btn">정보 수정 완료</button>
 </form>
 
-{% if messages %}
 
-    {% for message in messages %}
-        {% if meesage.tags %}
-        {{message.tags}}
-        {% endif %}
-        {{ message }}
-    {% endfor %}
-{% endif %}
 
 {% endblock content %}

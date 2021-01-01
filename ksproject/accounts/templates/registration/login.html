@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>로그인 하기</h1>
-<form method="POST" action="{% url 'login' %}">
+<form method="POST" action="{% url 'login' %}" class="login-form">
     {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">로그인</button>
+    {% for form in form %}
+    
+    <div class="login-title">{{form.label}} </div>
+    <div class="login-content">{{form}}</div>
+    {% endfor %}
+    
+    <button type="submit" id="login-btn">로그인</button>
+    <div class="link-btn">
+        <div class="sign-up"><a href="{% url 'signup' %}">아직 회원이 아니시라면?</a></div>
+        <div class="password_reset"><a href="{% url 'password_reset' %}">비밀번호를 까먹으셨나요?</a></div>
+    </div>
 </form>
 <!-- 로그인 관련 실패 에러창 메세지 -->
 {% if messages %}
@@ -18,6 +27,5 @@
 {% endif %}
 
 
-<p><a href="{% url 'signup' %}">아직 회원이 아니시라면?</a></p>
-<a href="{% url 'password_reset' %}">비밀번호를 까먹으셨나요?</a>
+
 {% endblock %}

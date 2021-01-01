@@ -382,13 +382,210 @@ input:focus::-webkit-input-placeholder {
 
 /* 닉네임 수정폼  */
 
-.update-nickname-form{
+.update-form{
     width: 40%;
-    height: 600px;
+    height: 400px;
     margin:10% auto;
     text-align: center;
     font-size: 1.5rem;
     border: 1.5px solid#F2AF5C;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+h1{
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.form-title{
+    font-size: 1.5rem;
+    margin-bottom: 10%;
+    font-weight: bold;
+}
+
+#id_nickname{
+    border-style: none;
+    border: 1px solid #F2AF5C;
+    border-radius: 5px;
+    padding: 5%;
+}
+
+.form-content{
+    margin-bottom: 10%;
     
+    }
+
+#submit-btn{
+    border-style: none;
+    background-color:#F2AF5C;
+    height: 35px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.message{
+    margin-bottom: 5%;
+    font-size: 1.2rem;
+    color: rgb(61, 61, 61);
+}
+
+.return-mypage{
+    border-radius: 5px;
+    background-color:#F2AF5C;
+    height: 45px;
+    width: 15%;
+    display: flex;
+    font-size: 1.5rem;
+    margin:0 auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.return-mypage a{
+    color: white;
+    
+}
+
+/* 비밀번호 재설정 부분 */
+
+p{
+    color: rgb(100, 100, 100);
+    margin-bottom: 10%;
+}
+
+#id_email,#id_new_password1,#id_new_password2,#id_username,#id_password,#id_password1,#id_password2
+{
+    border-style: none;
+    border: 1px solid #F2AF5C;
+    border-radius: 5px;
+    padding: 5%;
+}
+
+/* 로그인 부분 */
+
+.link-btn{
+    margin: 5% 0;
+}
+
+.login-title{
+    font-size: 1.5rem;
+    margin: 5% 0;
+}
+
+#login-btn{
+    border-style: none;
+    color: white;
+    border-radius: 5px;
+    background-color:#F2AF5C;
+    height: 45px;
+    width: 15%;
+    display: flex;
+    font-size: 1.5rem;
+    margin:5% auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form{
+    width: 40%;
+    height: 500px;
+    margin:10% auto;
+    text-align: center;
+    font-size: 1.5rem;
+    border: 1.5px solid#F2AF5C;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-up{
+    margin-bottom: 5%;
+}
+
+.link-btn a{
+    color: #3f3f3f;
+    
+}
+
+/* 회원가입 폼  */
+
+.sign-up-form{
+
+    width: 40%;
+    height: 700px;
+    margin:5% auto;
+    text-align: center;
+    font-size: 1.5rem;
+    border: 1.5px solid#F2AF5C;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.form-group{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-title{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: -10%;
+    margin-bottom: 10%;
+}
+
+.form-group+.form-group{
+    margin-top: 5%;
+}
+
+.help-text{
+    margin-top: 5%;
+    color: rgb(71, 71, 71);
+    font-size: 1.2rem;
+}
+
+.signup-btn{
+    margin-top: 5%;
+    border-style: none;
+    background-color: #F2AF5C;
+    color: white;
+    width: 25%;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+#signup-title{
+    margin-right: 10px;
+}
+
+.form-group-error{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.help-block{
+    margin-top: 5%;
 }

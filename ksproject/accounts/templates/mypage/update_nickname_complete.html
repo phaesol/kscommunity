@@ -1,4 +1,9 @@
-닉네임 변경이 완료 되었습니다
-<div class="return-mypage">
-    <a href="{% url 'mypage' user.pk %}">마이페이지로 돌아가기</a>
+{% extends 'base.html' %}
+{% block content%}
+<div class="update-nickname-complete">
+    <h1>닉네임 변경이 완료 되었습니다</h1>
+    <div class="return-mypage" >
+        <a href="{% url 'mypage' user.pk %}">마이페이지로 돌아가기</a>
+    </div>
 </div>
+{% endblock content%}

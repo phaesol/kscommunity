@@ -3,21 +3,21 @@
 
 
 {% block content %}
-<div class="signup">
-	<form action="{% url 'signup' %}" method="post">
+
+	<form action="{% url 'signup' %}" method="post" class="sign-up-form">
 		{% csrf_token %}
-	
+		<div class="signup-title">회원가입 하기</div>
 		{% for field in signup_form %}
-			<div class="form-group{% if field.errors %} has-error{% endif %}">
-				{{ field.label_tag }}
-				{{ field }}
-				
+			<div class="form-group{% if field.errors %}-error{% endif %}">
+				<div id="signup-title">{{ field.label}}</div>
+				<div id="signup-input">{{ field }}</div>
+			</div>	
 				{% if field.errors %}
 					{% for error in field.errors %}
-					<span class="help-block">{{ error }}</span>
+					<div class="help-block">{{ error }}</div>
 					{% endfor %}
 				{% endif %}
-			</div>
+			
 		{% endfor %}
 
 		{% if signup_form.non_field_errors %}
@@ -25,7 +25,14 @@
 			<p class="text-danger"><b>{{ error }}</b></p>
 			{% endfor %}
 		{% endif %}
-		<button class="btn btn-primary btn-block">회원가입</button>
+		<div class="help-text">
+			다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.<br>
+			비밀번호는 최소 8자 이상이어야 합니다.<br>
+			통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.<br>
+			숫자로만 이루어진 비밀번호는 사용할 수 없습니다.<br>
+		</div>
+		<button class="signup-btn">회원가입</button>
+		
 	</form>
-</div>
+
 {% endblock %}
