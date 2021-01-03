@@ -17,7 +17,7 @@
 <div class="detail-wrapper">
     <div class="content-wrapper">
         <div class="user">{{my_post.writer}}</div>
-        <div class="title">제목: {{my_post.title}}</div>
+        <div class="title"> {{my_post.title}}</div>
         <div class="content"> {{my_post.content|safe}}</div>
         {% if my_post.myimage %}
             <div class="image">
@@ -33,16 +33,16 @@
             {% endif %}
             <div class="hit-count">
             {% load hitcount_tags %}
-            조회수 {% get_hit_count for my_post within "days=1" %}
+            조회수 {% get_hit_count for my_post within "days=7" %}
             </div> 
             <div class="like">
                 
                 <a href="{% url 'like_toggle' my_post.id  %}">
                    
                     {% if my_post in user.like_post.all %}
-                    💔
+                    <img src="{% static 'yellow heart.png'%}">
                     {% else %}
-                    ❤️ 
+                    <img src="{% static 'heart.png'%}">
                     {% endif %}
                     {{my_post.like_count}} 
                 </a> 
@@ -65,8 +65,12 @@
 
 <form method="POST" action="{% url 'create_comment' my_post.id %}" class="comment-form">
     {% csrf_token %}
-    {{comment_form}}
-    <input type="submit">
+    
+    {% for com in comment_form %}
+    <div class="com-title">{{com.label}}</div>
+    <div class="com-content">{{com}}</div>
+    {% endfor %}
+    <button type="submit">작성</button>
 </form>
 
 <div class="comment-wrapper">

@@ -17,7 +17,7 @@ class Mini_Category(models.Model):
         
 class Post(models.Model, HitCountMixin):
     writer = models.CharField(max_length=8)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=20)
     content = models.TextField()
     updated_at = models.DateTimeField(auto_now_add= True) # 최초 생성 날짜만 갱신
     myimage = models.ImageField(null = True, blank = True)

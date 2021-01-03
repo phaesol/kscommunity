@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% load static %}
+{% block head %}
+{% block title %}<title>{{my_post}}</title>{% endblock title %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+{% endblock head %}
+{% block content%}
+
     <form action="" method="POST">
         {% csrf_token %}
-        삭제한다능
-        <input type="submit" value="delete">
-        <a href="{{ request.META.HTTP_REFERER }}">뒤로가기</a></div>
+        <div class="delete-text">글을 정말 삭제하시겠습니까?</div>
+        <div class="btn-wrapper">
+        <button type="submit" class="delete-btn">삭제하기</button>
+        <a href="{{ request.META.HTTP_REFERER }}">뒤로가기</a>
+        </div>
     </form>
-</body>
-</html>
+
+{% endblock content %}

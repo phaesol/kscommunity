@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('writer', models.CharField(max_length=8)),
-                ('title', models.CharField(max_length=50)),
+                ('title', models.CharField(max_length=20)),
                 ('content', models.TextField()),
                 ('updated_at', models.DateTimeField(auto_now_add=True)),
                 ('myimage', models.ImageField(blank=True, null=True, upload_to='')),

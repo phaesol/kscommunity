@@ -128,6 +128,14 @@ class deleteView(DeleteView):
     def get_success_url(self):
         return reverse('post_list', kwargs={'mini_category_id': self.object.category_id})
     
+    def get_context_data(self, **kwargs):
+        context = super(deleteView, self).get_context_data(**kwargs)
+       
+        context['categories'] = Category.objects.all()
+       
+      
+        
+        return context
 
     
 

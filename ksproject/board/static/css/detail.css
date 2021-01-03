@@ -15,15 +15,18 @@ html {
     font-weight: normal;
     font-style: normal;
 }
-
+/* 글 부분 */
 .back {
     width: 100%;
-    margin-left: 5%;
+   
     margin-top: 10px;
 
     font-size: 1.5rem;
 }
 
+.back a{
+    padding-left: 5%;
+}
 .back a:link {
     color: black;
 }
@@ -45,10 +48,11 @@ html {
 .category {
     font-size: 3rem;
     text-align: center;
+    margin: 5% 0;
 }
 
 .detail-wrapper {
-    margin: 15px auto;
+    margin: 10% auto;
     display: flex;
     width: 80%;
     font-size: 1.5rem;
@@ -60,7 +64,7 @@ html {
     display: flex;
     margin-left: auto;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
 }
 
 .count-wrapper {
@@ -92,23 +96,90 @@ html {
 
 
 .content-wrapper {
-    flex: 3;
+  
+    width: 80%;
 }
 
 .title
  {
-    text-align: center;
+    
     font-size: 3rem;
     width: 100%;
+    font-weight: bold;
+    margin: 10px 30px;
 }
 
 .content{
-    text-align: center;
+    
     font-size: 2rem;
     width: 100%;
+    margin: 10px 30px;
     
 }
 
 .delete-post{
     margin-right: 5%;
+}
+
+.delete-post a{
+    color: black;
+}
+
+.delete-text{
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 15% ;
+    margin-bottom: 5%;
+}
+
+.btn-wrapper{
+    text-align: center;
+}
+
+.btn-wrapper a{
+    margin-left: 5%;
+    color: black;
+}
+
+.delete-btn{
+    border-style: none;
+    color: white;
+    background-color: #F2AF5C;
+    cursor: pointer;
+    margin: 0 auto;
+    text-align: center;
+    width: 10%;
+    height: 35px;
+    border-radius:5px ;
+    font-size: 1.5rem;
+}
+
+.like a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.like img{
+    width: 15px;
+    height: 15px;
+    align-items: center;
+    margin-right: 5px;
+}
+
+
+/* 댓글부분 */
+
+.comment-form{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    
+}
+
+.com-title{
+    margin-left: 13%;
+    margin-right: 10%;
 }

@@ -319,6 +319,11 @@ input:focus::-webkit-input-placeholder {
     float: left;
     margin-left: 10%;
     margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.category-post a{
+    color: black;
 }
 .category-title{
     border-bottom: 1px solid #F2AF5C;
@@ -347,6 +352,10 @@ input:focus::-webkit-input-placeholder {
     height: 350px;
     margin: 35px;
     
+}
+
+.popular-post a{
+    color: black;
 }
 
 .popular-title{
@@ -458,7 +467,7 @@ h1{
 
 /* 비밀번호 재설정 부분 */
 
-p{
+.help-p{
     color: rgb(100, 100, 100);
     margin-bottom: 10%;
 }
