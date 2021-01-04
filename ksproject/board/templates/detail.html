@@ -11,6 +11,7 @@
 
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="back"><a href="{{ request.META.HTTP_REFERER }}">뒤로가기</a></div>
 <div class="category">{{my_post.category}}</div>
 
@@ -62,60 +63,110 @@
 
     
 </div>
+<div class="comment-wrapper">
 
 <form method="POST" action="{% url 'create_comment' my_post.id %}" class="comment-form">
     {% csrf_token %}
     
     {% for com in comment_form %}
     <div class="com-title">{{com.label}}</div>
+  
     <div class="com-content">{{com}}</div>
     {% endfor %}
-    <button type="submit">작성</button>
+    <button type="submit" class="com-btn">작성</button>
+    <input type="checkbox" id="checkbox"><div class="check-text">익명</div>
+   
 </form>
 
-<div class="comment-wrapper">
+<div class="com-wrapper">
     {% for comment in my_post.comment_set.all %}
-    <div class="comment">{{comment.body}}</div>
-    <div class="comment-time">{{comment.created_at}}</div>
-    <div class="writer">{{comment.writer}}</div>
-    {%if user.nickname == comment.writer %}
-    <div class="delete-comment">
-        <!-- 댓글 삭제 전 확인 알람 -->
-        <a onclick="return confirm('댓글을 정말로 삭제하시겠습니까?');" href="{% url 'delete_comment' comment.id %}">삭제</a>
+   
+    <div class="comment">
+        <div class="com-body">{{comment.body}}</div>
+        <div class="com-sub">
+            <div class="comment-time">{{comment.created_at}}</div>
+            <div class="recom-title" onclick="dis()">대댓글</div>
+            {%if user.nickname == comment.writer %}
+            <div class="mywriter"  id="writer">{{comment.writer}} (글쓴이)</div>
+            <div class="delete-comment">
+                <!-- 댓글 삭제 전 확인 알람 -->
+                <a onclick="return confirm('댓글을 정말로 삭제하시겠습니까?');" href="{% url 'delete_comment' comment.id %}">삭제</a>
+            </div>
+           
+            {%else%}
+            <div class="writer"  id="writer">{{comment.writer}}</div>
+            {% endif %}
+        </div>
+        
     </div>
-    {% endif %}
+
+   
+
+
     <!-- 나중에 클릭하면 대댓글 폼 나타나게 구현하기 -->
-    <div class="recomment-btn">대댓글</div>
+    
         <form method="POST" action="{% url 'create_recomment' my_post.id comment.id %}" class="recomment-form">
             {% csrf_token %}
-            {{recomment_form}}
-            <input type="submit">
-        </form>
-        {% for recomment in comment.recomment.all %}
-            <div class="recomment">대댓글:{{recomment.body}}</div>
-            <div class="recomment-time">{{recomment.created_at}}</div>
-            <div class="writer">{{recomment.writer}}</div>
-            <!-- 요청된 유저가 해당 글쓴이와 같으면 -->
-            {%if user.nickname == recomment.writer %}
-            <div class="delete-recomment">
-                <a onclick="return confirm('댓글을 정말로 삭제하시겠습니까?');" href="{% url 'delete_recomment' recomment.id %}">삭제</a>
+            <div class="hidden">
+            <div class="recom-hidden">
+                <div class="hidden-title">대댓글</div>
+                <div class="hidden-content">{{recomment_form}}</div>
+                <button type="submit" class="com-btn">작성</button>
+                <input type="checkbox" id="checkbox"><div class="re-check-text">익명</div>
             </div>
-
-            {% endif %}
-        {% endfor %}
+            </div>
+        </form>
+        <div class="recom-wrapper">
+            {% for recomment in comment.recomment.all %}
+               
+                <div class="recomment">↪ {{recomment.body}}</div>
+                <div class="recom-sub">
+                    <div class="recomment-time">{{recomment.created_at}}</div>
+                    
+                    <!-- 요청된 유저가 해당 글쓴이와 같으면 -->
+                    {%if user.nickname == recomment.writer %}
+                    <div class="mywriter" id="writer">{{recomment.writer}} (글쓴이) </div>
+                    <div class="delete-recomment">
+                        <a onclick="return confirm('댓글을 정말로 삭제하시겠습니까?');" href="{% url 'delete_recomment' recomment.id %}">삭제</a>
+                    </div>
+                    {% else %}
+                    <div class="writer" id="writer">{{recomment.writer}}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+   
     {% endfor %}
 </div>
+</div>
 
-
-
+{% endif %}
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
 </script>
 <script>
-    // $('.delete-comment').click(function(){
-    //     confirm('지울꺼니?');
-    // });
 
+  function dis(){
+      if($('.hidden').css('display') == 'none'){
+      $('.hidden').show();
+    }else{
+      $('.hidden').hide();
+    }
+    };
+    $
+  
+
+    $('.com-btn').on('submit',function(e){
+        if(this.checked){
+            e.preventDefault();
+            $("#writer").text("익명");
+        }
+    });
+
+
+
+
+      
    
 </script>
 

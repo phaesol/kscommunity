@@ -53,6 +53,7 @@ html {
 
 .detail-wrapper {
     margin: 10% auto;
+    margin-bottom: 0;
     display: flex;
     width: 80%;
     font-size: 1.5rem;
@@ -80,7 +81,7 @@ html {
 
 
 .user {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 10px 30px;
     
 }
@@ -170,16 +171,170 @@ html {
 
 /* 댓글부분 */
 
+.comment-wrapper{
+    margin: 10% auto;
+    margin-top:0;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    font-size: 1.5rem;
+    border: rgb(129, 129, 129) 1px solid;
+    border-top:none;
+}
+
 .comment-form{
     width: 80%;
     display: flex;
     align-items: center;
     font-size: 1.3rem;
     font-weight: bold;
-    
+    margin: 5% 0;
 }
+
+
+.mywriter{
+    color: #F28D52;
+    font-weight:600;
+}
+
+.delete-comment a{
+    color:  rgb(129, 129, 129);
+}
+
 
 .com-title{
     margin-left: 13%;
-    margin-right: 10%;
+    
+    width: 20%;
+    
+}
+
+.com-content{
+    width: 55%;
+
+}
+
+.com-content #id_body{
+    width: 95%;
+    height: 30px;
+}
+
+.com-btn{
+    width: 10%;
+    margin-left: 5%;
+    background-color:#F2AF5C ;
+    border-style: none;
+    border-radius: 5px;
+    height: 35px;
+    color: white;
+    cursor: pointer;
+}
+
+#checkbox{
+    width: 5%;
+}
+
+.check-text{
+    width: 10%;
+}
+
+.comment{
+  
+    border-top: 1px solid  rgb(129, 129, 129);
+}
+
+
+
+
+
+#re-checkbox{
+    width: 5%;
+    
+}
+
+.re-check-text{
+    width: 10%;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.com-body{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+.com-sub{
+    display: flex;
+    margin-bottom: 5%;
+}
+
+.com-sub div+div{
+    margin-right: 5%;
+}
+
+.comment-time{
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+.recom-title{
+    cursor: pointer;
+    
+}
+
+.recomment-form{
+    display: flex  ;
+}
+
+
+.recomment-time{
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+.recom-wrapper{
+    margin-left: 10%;
+}
+
+.hidden{
+    display: none;
+    width: 100%;
+}
+
+.recom-hidden{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+   
+}
+
+.hidden-title{
+    width: 15%;
+    text-align: center;
+}
+.hidden-content{
+    width: 60%;
+}
+
+.hidden-content #id_body{
+    width: 95%;
+    height: 35px;
+
+}
+
+.recom-sub{
+    display: flex;
+    margin-bottom: 5%;
+    
+}
+
+.recom-sub div+div{
+    margin-right: 5%;
+}
+
+.delete-recomment a{
+    color: rgb(129, 129, 129);
 }
