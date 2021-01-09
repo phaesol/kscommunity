@@ -17,7 +17,11 @@
 
 <div class="detail-wrapper">
     <div class="content-wrapper">
+        {%if my_post.category.id == 2 %}
+        <div class="user">익명</div>
+        {% else %}
         <div class="user">{{my_post.writer}}</div>
+        {% endif %}
         <div class="title"> {{my_post.title}}</div>
         <div class="content"> {{my_post.content|safe}}</div>
         {% if my_post.myimage %}
@@ -26,6 +30,8 @@
             </div>
             {% endif %}
     </div>
+
+
     <div class="sub-wrapper">
         <div class="count-wrapper">
         <!-- 조회수 -->
@@ -85,7 +91,9 @@
         <div class="com-body">{{comment.body}}</div>
         <div class="com-sub">
             <div class="comment-time">{{comment.created_at}}</div>
-            <div class="recom-title" onclick="dis()">대댓글</div>
+            <div class="recom-title" onclick="dis()">
+
+            대댓글</div>
             {%if user.nickname == comment.writer %}
             <div class="mywriter"  id="writer">{{comment.writer}} (글쓴이)</div>
             <div class="delete-comment">
@@ -146,15 +154,34 @@
 </script>
 <script>
 
-  function dis(){
-      if($('.hidden').css('display') == 'none'){
-      $('.hidden').show();
-    }else{
-      $('.hidden').hide();
-    }
-    };
-    $
-  
+
+
+
+    
+    // var hide = document.querySelectorAll('.hidden');
+    
+    // var toggle = document.querySelectorAll('.recom-title');
+    
+    // function dis() {
+    //     for (var i =0; i<toggle.length; i++){
+    //         console.log(toggle[i])
+    //         for (var j=0; j <hide.length; j++) {
+                
+    //             if(toggle[i]==hide[j]){
+    //                 console.log(hide[j])
+    //                 hide[j].style.display = 'block';
+    //         }else{
+    //             hide[j].style.display = 'none';}
+ 
+    //         }
+           
+    //     }
+    // }
+    
+
+
+    
+    
 
     $('.com-btn').on('submit',function(e){
         if(this.checked){
@@ -162,6 +189,9 @@
             $("#writer").text("익명");
         }
     });
+
+
+
 
 
 

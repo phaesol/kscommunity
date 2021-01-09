@@ -301,6 +301,11 @@ html {
 .hidden{
     display: none;
     width: 100%;
+    
+}
+
+.hidden .selected{
+    display:block;
 }
 
 .recom-hidden{

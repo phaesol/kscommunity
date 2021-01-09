@@ -175,6 +175,9 @@ class MyPasswordResetView(PasswordResetView):
         messages.info(self.request, '암호 변경 메일을 발송했습니다. 메일을 확인해주세요.')
         return super().form_valid(form)
    
+    def form_invalid(self, form):
+        messages.error(self.request, '잘못된 이메일 입니다.', extra_tags='danger')
+        return super().form_invalid(form)
     
     def get_context_data(self, **kwargs):
         context = super(MyPasswordResetView, self).get_context_data(**kwargs)
