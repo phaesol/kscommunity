@@ -258,10 +258,16 @@ html {
     font-size: 1.3rem;
 }
 
+.comment{
+    width: 100%;
+}
+
 .com-body{
+    width: 80%;
+    word-break: break-all;
     font-size: 1.5rem;
     font-weight: bold;
-    margin-top: 5%;
+    margin: 5%;
     margin-left: 5%;
 }
 
@@ -298,15 +304,17 @@ html {
     margin-left: 10%;
 }
 
-.hidden{
+.recomment-form{
     display: none;
     width: 100%;
     
 }
 
-.hidden .selected{
-    display:block;
+
+.active{
+    display: block;
 }
+
 
 .recom-hidden{
     width: 100%;
@@ -314,6 +322,16 @@ html {
     align-items: center;
     margin-bottom: 5%;
    
+}
+
+.recomment{
+    
+    margin: 5%;
+    width: 80%;
+    word-break: break-all;
+    font-size: 1.5rem;
+    margin: 5%;
+    margin-left: 5%;
 }
 
 .hidden-title{

@@ -80,7 +80,7 @@
     <div class="com-content">{{com}}</div>
     {% endfor %}
     <button type="submit" class="com-btn">작성</button>
-    <input type="checkbox" id="checkbox"><div class="check-text">익명</div>
+    <input type="checkbox" id="checkbox" ><div class="check-text">익명</div>
    
 </form>
 
@@ -91,7 +91,7 @@
         <div class="com-body">{{comment.body}}</div>
         <div class="com-sub">
             <div class="comment-time">{{comment.created_at}}</div>
-            <div class="recom-title" onclick="dis()">
+            <div class="recom-title">
 
             대댓글</div>
             {%if user.nickname == comment.writer %}
@@ -102,32 +102,33 @@
             </div>
            
             {%else%}
-            <div class="writer"  id="writer">{{comment.writer}}</div>
+            <div class="writer" id="writer">{{comment.writer}}</div>
             {% endif %}
+            
         </div>
-        
-    </div>
-
-   
-
-
-    <!-- 나중에 클릭하면 대댓글 폼 나타나게 구현하기 -->
-    
         <form method="POST" action="{% url 'create_recomment' my_post.id comment.id %}" class="recomment-form">
             {% csrf_token %}
-            <div class="hidden">
+          
             <div class="recom-hidden">
                 <div class="hidden-title">대댓글</div>
                 <div class="hidden-content">{{recomment_form}}</div>
                 <button type="submit" class="com-btn">작성</button>
                 <input type="checkbox" id="checkbox"><div class="re-check-text">익명</div>
             </div>
-            </div>
+           
         </form>
+        
+    </div>
+
+   
+
+
+    
+        
         <div class="recom-wrapper">
             {% for recomment in comment.recomment.all %}
                
-                <div class="recomment">↪ {{recomment.body}}</div>
+                <div class="recomment">💬 &nbsp &nbsp &nbsp {{recomment.body}}</div>
                 <div class="recom-sub">
                     <div class="recomment-time">{{recomment.created_at}}</div>
                     
@@ -137,9 +138,18 @@
                     <div class="delete-recomment">
                         <a onclick="return confirm('댓글을 정말로 삭제하시겠습니까?');" href="{% url 'delete_recomment' recomment.id %}">삭제</a>
                     </div>
+                    <script>
+                        var i = "{{recomment}}";
+                        var hi = document.querySelector('.mywriter');
+                        console.log(i);
+                    </script>
                     {% else %}
                     <div class="writer" id="writer">{{recomment.writer}}</div>
+
+                    
                     {% endif %}
+                   
+
                 </div>
             {% endfor %}
         </div>
@@ -155,40 +165,47 @@
 <script>
 
 
+// 클릭시 대댓글
+    let toggle = document.querySelectorAll('.comment')
+    
+    for(let i=0; i<toggle.length; i++) {
+        $('.recom-title').eq(i).click(function(){
+            $('.recomment-form').removeClass('active');
+            $('.recomment-form').eq(i).addClass('active');
+        });
+    }
+
+   
+    
 
 
+
     
-    // var hide = document.querySelectorAll('.hidden');
-    
-    // var toggle = document.querySelectorAll('.recom-title');
-    
-    // function dis() {
-    //     for (var i =0; i<toggle.length; i++){
-    //         console.log(toggle[i])
-    //         for (var j=0; j <hide.length; j++) {
-                
-    //             if(toggle[i]==hide[j]){
-    //                 console.log(hide[j])
-    //                 hide[j].style.display = 'block';
-    //         }else{
-    //             hide[j].style.display = 'none';}
- 
-    //         }
-           
+
+    // $('.com-btn').on('submit',function(e){
+    //     if(this.checked){
+    //         e.preventDefault();
+    //         $("#writer").text("익명");
+    //         this.submit();
     //     }
-    // }
-    
+    // });
+
+    // $(document).ready(function(){
+    // $("#checkbox").change(function(e){         
+    //         if($("#checkbox").is(":checked")){
+    //             e.preventDefault();
+    //            $("#writer").text("익명");
+    //         }
+    //     });
+
+    // });
 
 
     
-    
 
-    $('.com-btn').on('submit',function(e){
-        if(this.checked){
-            e.preventDefault();
-            $("#writer").text("익명");
-        }
-    });
+
+
+
 
 
 
